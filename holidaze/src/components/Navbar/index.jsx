@@ -19,7 +19,7 @@ function NavBar() {
               style={{ maxHeight: '200px' }}
               navbarScroll
             >
-              <Nav.Link as={NavLink} to="/">Products</Nav.Link>
+              <Nav.Link as={NavLink} to="/venues">Products</Nav.Link>
               <Nav.Link as={NavLink} to="/">Contact</Nav.Link>
               <Nav.Link as={NavLink} to="/">
                 <i class="bi bi-cart-fill text-dark me-1" id="cartIndex"></i>

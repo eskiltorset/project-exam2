@@ -3,8 +3,8 @@ import React from 'react';
 // import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-// import Products from "./pages/Products";
-// import Product from "./pages/SingleProduct";
+import Venues from "./pages/Venues";
+import Venue from "./pages/SingleVenue";
 // import Cart from "./pages/Cart";
 // import Checkout from "./pages/Checkout";
 
@@ -31,12 +31,12 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {/* <Route index element={<Products />} />
-          <Route path="products" element={<Products />} />
-          <Route path="contact" element={<Contact />} />
+          {/* <Route index element={<Venues />} /> */}
+          <Route path="venues" element={<Venues />} />
+          {/* <Route path="contact" element={<Contact />} />
           <Route path="cart" element={<Cart />} />
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="product/:id" element={<Product />} /> */}
+          <Route path="checkout" element={<Checkout />} /> */}
+          <Route path="venue/:id" element={<Venue />} />
           <Route path="*" element={<RouteNotFound />} />
         </Route>
       </Routes>
