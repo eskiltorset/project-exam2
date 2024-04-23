@@ -1,0 +1,11 @@
+img {
+    min-height: 300px;
+    max-height: 300px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.venue-card:hover {
+    background-color: #f8f8f8;
+    cursor: pointer;
+}

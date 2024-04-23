@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-// import "./venues.css";
+import "./venues.css";
 
 // Fetching all venues
 function Venues() {
@@ -64,9 +64,9 @@ function Venues() {
           //   price.innerText = `${venue.price},-`;
           // }
             return (
-                <div className='mt-4 mx-2 w-25'>
+                <div className='venue-card mt-4 mx-2 w-25'>
                 <div key={venue.id}>
-                  <img src={venue.media[0].url} alt={venue.name} className='w-100 rounded'></img>
+                  <img src={venue.media[0].url} alt={venue.name} className='rounded'></img>
                   <div className='card-body-left mt-2 col-md-8'>
                     <h5 className=''>{venue.name}</h5>
                     <h6>{venue.location.city}, {venue.location.country}</h6>
