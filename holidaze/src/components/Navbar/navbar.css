@@ -19,3 +19,8 @@
     background-color: blue;
     color: red;
 } */
+
+.navbar .nav-link { 
+    flex-direction: row;
+    float: left;
+}

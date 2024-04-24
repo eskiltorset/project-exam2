@@ -49,6 +49,15 @@ function Login() {
               if (response.status === 200) {
                   console.log("Login successful!");
                   window.location.href = "/venues";
+
+                  const accessToken = json.data.accessToken;
+                  localStorage.setItem("accessToken", accessToken);
+    
+                  let loggedInUser = json.data.name;
+                  localStorage.setItem("loggedInUser", loggedInUser);
+
+                  console.log(`Name: ${localStorage.getItem("loggedInUser")}`);
+                  console.log(accessToken)
                   // success_message[0].innerText = "Register successfull!";
                   // window.location.reload();
               }
@@ -57,12 +66,7 @@ function Login() {
                   console.log("Login failed!");
               }
 
-              const accessToken = json.accessToken;
-              localStorage.setItem("accessToken", accessToken);
-
-              let loggedInUser = json.name;
-              localStorage.setItem("loggedInUser", loggedInUser);
-              console.log(`Name: ${localStorage.getItem("loggedInUser")}`);
+              
       
           } catch (error) {
               console.log(error);

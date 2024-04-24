@@ -1,4 +1,6 @@
 import Button from 'react-bootstrap/Button';
+// import Dropdown from 'react-bootstrap/Dropdown';
+// import DropdownButton from 'react-bootstrap/DropdownButton';
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -15,6 +17,10 @@ console.log(success_message);
 // ^[\w\-.]+@(stud\.)?noroff\.no$
 
 function Register() {
+
+  let [role, setRole] = useState();
+  console.log(role);
+
     const schema = yup
     .object({
       username: yup
@@ -67,7 +73,7 @@ function Register() {
                 if (response.status === 201) {
                     console.log("Register successful!");
                     success_message[0].innerText = "Register successfull!";
-                    window.location.reload();
+                    
                 }
               
                 else {
@@ -81,13 +87,23 @@ function Register() {
           }
       
               try {
+
+                console.log(role);
+                if(role == "venueManager"){
+                  role = true;
+                }
+
+                else{
+                  role = false;
+                }
       
                   let user = {
                       name: data.username,
                       email: data.email,
                       password: data.password,
                       avatar: data.avatar.url,
-                      venueManager: data.radio.value
+                     venueManager: role
+                      
                   };
       
                   registerUser(register_url, user);
@@ -135,28 +151,20 @@ function Register() {
 
               <Form.Group className="mb-3">
               <Form.Label>Choose type of user</Form.Label>
-                {['radio'].map((type) => (
-                  <div key={`inline-${type}`} className="mb-3">
                     <Form.Check
-                      inline
-                      label="Customer"
-                      name="customer"
-                      value="false"
-                      type={type}
-                      // checked={this.state.selectedOption === "false"}
-                      id={`inline-${type}-customer`}
+                        type="radio"
+                        label="Customer"
+                        name="role"
+                        value="customer"   
+                        onChange={e => setRole(e.target.value)}      
                     />
                     <Form.Check
-                      inline
-                      label="Venue Manager"
-                      name="manager"
-                      value="true"
-                      type={type}
-                      // checked={this.state.selectedOption === "true"}
-                      id={`inline-${type}-manager`}
+                        type="radio"
+                        label="Venue Manager"
+                        name="role"
+                        value="venueManager"
+                        onChange={e => setRole(e.target.value)}
                     />
-                  </div>
-                ))}
               </Form.Group>
 
               <Form.Text className='register-success text-success'></Form.Text>
