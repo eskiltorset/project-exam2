@@ -102,8 +102,7 @@ function Register() {
                       email: data.email,
                       password: data.password,
                       avatar: data.avatar.url,
-                     venueManager: role
-                      
+                      venueManager: role
                   };
       
                   registerUser(register_url, user);

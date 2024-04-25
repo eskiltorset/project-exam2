@@ -8,7 +8,7 @@ const MaybeShowNavbar = ({ children }) => {
 
     useEffect(() => {
         console.log(location)
-        if (location.pathname === '/venues' && localStorage.getItem("loggedInUser") != null){
+        if ((location.pathname != '/login' || location.pathname != '/register') && (localStorage.getItem("loggedInUser") != null)){
             setShowNavbar(false);
         }
         else {

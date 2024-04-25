@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Venues from "./pages/Venues";
+import CreateVenue from "./pages/CreateVenue";
 import Venue from "./pages/SingleVenue";
 // import Cart from "./pages/Cart";
 // import Checkout from "./pages/Checkout";
@@ -33,6 +34,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           {/* <Route index element={<Venues />} /> */}
+          <Route path="create-venue" element={<CreateVenue />} />
           <Route path="venues" element={<Venues />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />

@@ -19,7 +19,7 @@ function NavBar() {
       
         <Navbar expand="md" className="bg-body-white shadow-sm p-4">
           <Container fluid>
-            <Navbar.Brand as={NavLink} to="/">      
+            <Navbar.Brand as={NavLink} to="/venues">      
               {/* <img src={HolidazeLogo} alt="Holidaze Logo" height='30'/> */}
               Holidaze
             </Navbar.Brand>
@@ -30,8 +30,9 @@ function NavBar() {
                 style={{ maxHeight: '200px' }}
                 navbarScroll
               >
-                <MaybeShowNavbar>
+                    <Nav.Link as={NavLink} to="/create-venue">Create a venue</Nav.Link>
                     <Nav.Link as={NavLink} to="/venues">Venues</Nav.Link>
+                  <MaybeShowNavbar>
                     <Nav.Link as={NavLink} to="/register" id="nav_register">Register</Nav.Link>
                     <Nav.Link as={NavLink} to="/login" id="nav_login">Login</Nav.Link>              
                   </MaybeShowNavbar>
