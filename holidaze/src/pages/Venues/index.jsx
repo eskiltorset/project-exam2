@@ -45,11 +45,15 @@ function Venues() {
       if (isError) {
         return <div>Error loading data</div>;
       }
+
+      
     
       return (
         <div className='m-3'> <h1 className="text-center p-3">Venues</h1>
         <div className='venues-div d-flex flex-row flex-wrap justify-content-evenly'>
          {Array.from(venues).map((venue) => {
+          if(venue.media[0] != null) {
+          
           // const price = document.getElementsByClassName('venuePrice');
           // console.log(price)
           // const discount = venue.price - venue.discountedPrice;
@@ -64,8 +68,8 @@ function Venues() {
           //   price.innerText = `${venue.price},-`;
           // }
             return (
-                <div className='venue-card mt-4 mx-2 w-25'>
-                <div key={venue.id}>
+                <div key={venue.id} className='venue-card mt-4 mx-2 w-25'>
+                <div>
                   <img src={venue.media[0].url} alt={venue.name} className='rounded'></img>
                   <div className='card-body-left mt-2 col-md-8'>
                     <h5 className=''>{venue.name}</h5>
@@ -81,6 +85,7 @@ function Venues() {
                 </div>
                 </div>
             );
+          }
           })}
         </div>
         </div>

@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 // import { Cartcontext } from '../../context/context';
 // import "./singleProduct.css";
+import "./singleVenue.css";
+
 
 
 function Venue() {
@@ -61,28 +63,39 @@ function Venue() {
 //   }
 
   return (
-    <div className='vh-100 w-50'>
-    <div className='mt-5 d-flex justify-content-center'>
-        <div className='m-2'>
-        <div key={item.id}>
-        <h5 className='mt-2'>{item.name}</h5>
-          <img src={item.media[0].url} alt={item.name}className='w-100'></img>
-          <div className='card-body p-3'>
-            <h6>{item.location.city}, {item.location.country}</h6>
-            <p>{item.maxGuests} guests</p>
-            <p>{item.description}</p>
-            <div>
-            <img src={item.owner.avatar.url} alt={item.owner.name}className='w-25 rounded-circle'></img>
-            <p>published by <br />{item.owner.name}</p>
+    <div className='vh-100 container row justify-content-center mt-3 col-lg-12'>
+      <div className='left-content d-flex item-div col-lg-7'>
+          <div className='m-2 w-100'>
+          <div key={item.id}>
+          <h5 className='mt-2'>{item.name}</h5>
+            <img src={item.media[0].url} alt={item.name}className='w-100'></img>
+            <div className='card-body p-3'>
+              <p className='float-end'>{item.rating}/5&#9733; </p>
+              <h6>{item.location.city}, {item.location.country}</h6>
+              <p>{item.maxGuests} guests</p>
+              <p>{item.description}</p>
+              <div className='avatar-container'>
+                <small>published by<br/></small>
+                <img src={item.owner.avatar.url} alt={item.owner.name}className='rounded-circle'></img>
+                <small><b>{item.owner.name}</b></small>
+              </div>
+              {/* <button onClick={() => dispatch({type: 'ADD', payload: item })} className='btn btn-outline-secondary mb-3 float-end'>Add to cart</button> */}
             </div>
-           
-            <p>{item.rating}/5&#9733; </p>
-            <h6></h6>
-            {/* <button onClick={() => dispatch({type: 'ADD', payload: item })} className='btn btn-outline-secondary mb-3 float-end'>Add to cart</button> */}
+          </div>
+          </div>
+      </div>
+      <div className='right-content col-lg-5 mt-5'>
+        <div className='w-100 h-auto border p-3'>
+          <h5>{item.price}kr pr night</h5>
+          <hr class="hr" />
+          <div className='button-container justify-content-around'>
+            <button className='col-sm-5'>Edit Venue</button>
+            <button className='col-sm-5 float-end'>Delete Venue</button>
+            <button className='w-100 mt-3'>View Bookings</button>
           </div>
         </div>
-        </div>
-    </div>
+
+      </div>
     </div>
   );
 }
