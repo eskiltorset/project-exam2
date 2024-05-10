@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Venues from "./pages/Venues";
 import CreateVenue from "./pages/CreateVenue";
+import Update from "./components/Update";
 import Venue from "./pages/SingleVenue";
 // import Cart from "./pages/Cart";
 // import Checkout from "./pages/Checkout";
@@ -35,6 +36,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           {/* <Route index element={<Venues />} /> */}
           <Route path="create-venue" element={<CreateVenue />} />
+          <Route path="edit/:id" element={<Update />} />
           <Route path="venues" element={<Venues />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />

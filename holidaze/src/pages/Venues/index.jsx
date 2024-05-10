@@ -68,22 +68,24 @@ function Venues() {
           //   price.innerText = `${venue.price},-`;
           // }
             return (
+             
                 <div key={venue.id} className='venue-card mt-4 mx-2 w-25'>
+                   <Link to={`/venue/${venue.id}`} className='text-decoration-none text-reset'>
                 <div>
                   <img src={venue.media[0].url} alt={venue.name} className='rounded'></img>
-                  <div className='card-body-left mt-2 col-md-8'>
+                  <div className='card-body-left mt-2 col-md-12'>
+                  <p className='float-end'>{venue.rating}/5&#9733; </p>
                     <h5 className=''>{venue.name}</h5>
                     <h6>{venue.location.city}, {venue.location.country}</h6>
                     <p>{venue.maxGuests} guests</p>
                     <p className='venuePrice'><b>kr {venue.price}</b> pr night</p>
-                    <Link to={`/venue/${venue.id}`} className='btn btn-outline-secondary'>View Venue</Link>
-                  </div>
-                  <div className='card-body-right p-3 w-25 col-md-4 float-end'>
-                    <p className=''>{venue.rating}/5&#9733; </p>
+                    {/* <Link to={`/venue/${venue.id}`} className='btn btn-outline-secondary'>View Venue</Link> */}
                   </div>
 
                 </div>
+                </Link>
                 </div>
+                
             );
           }
           })}

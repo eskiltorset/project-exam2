@@ -70,46 +70,7 @@ function CreateVenue() {
         console.log(data);
         const token = localStorage.getItem("accessToken");
 
-        // async function registerKey(url, keyData){
-
-        // try {
-        //     const postKey = {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             Authorization: `Bearer ${token}`,
-        //         },
-        //         body: JSON.stringify(keyData),
-        //     };            
-            
-        //     const response = await fetch(url, postKey);
-        //     console.log(response);
-        //     const json = await response.json();
-        //     console.log(json);
-
-        //     console.log(json.data.key)
-        //     const storeApiKey = json.data.key;
-        //     localStorage.setItem("apiKey", storeApiKey);
-        // }
-
-        // catch (error) {
-        //     console.log(error);
-        // }
-
-        // }
-
-        // let key  = {
-        // name: "Venue Key",
-        // };
-    
-        // registerKey(apiKey, key);
-
-        // console.log(key);
-
         async function registerVenue(url, venueData) {
-        
-        // const apiKeyLS = localStorage.getItem(apiKeyLS);
-        // console.log(apiKeyLS);
 
         try {
             const postData = {
@@ -148,9 +109,11 @@ function CreateVenue() {
                 let venue = {
                     name: data.name,
                     description: data.description,
-                    location: { city: data.city,
+                    location: { 
+                      city: data.city,
                       zip: data.zip,
-                      country: data.country},
+                      country: data.country
+                    },
                     media: data.media.url,
                     maxGuests: data.maxGuests,
                     price: data.price
@@ -232,3 +195,4 @@ function CreateVenue() {
 }
 
 export default CreateVenue;
+

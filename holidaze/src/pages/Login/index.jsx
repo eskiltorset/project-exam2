@@ -64,6 +64,9 @@ function Login() {
             
               else {
                   console.log("Login failed!");
+                  const errorMessage = document.querySelector('.errorMessage');
+
+                  errorMessage.innerText = "Invalid email or password";
               }
 
               
@@ -105,6 +108,8 @@ function Login() {
                 <Form.Control {...register('password')} id="pwd" placeholder='Your password ...' />
                 <Form.Text className='text-danger'>{errors.password?.message}</Form.Text>
               </Form.Group>
+
+              <p className='errorMessage text-danger'></p>
   
               <Button variant="secondary" type="submit">
                 Submit
