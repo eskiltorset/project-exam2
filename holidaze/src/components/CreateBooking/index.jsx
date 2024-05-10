@@ -38,7 +38,7 @@ import * as yup from 'yup';
 export function Booking(data) {
 
     const createBooking_URL = 'https://v2.api.noroff.dev/holidaze/bookings';
-const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
+    const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
 
     let { id } = useParams();
 

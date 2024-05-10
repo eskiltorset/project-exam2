@@ -8,6 +8,7 @@ import Venues from "./pages/Venues";
 import CreateVenue from "./pages/CreateVenue";
 import Update from "./components/Update";
 import Venue from "./pages/SingleVenue";
+import Profile from "./pages/Profile";
 // import Cart from "./pages/Cart";
 // import Checkout from "./pages/Checkout";
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} /> */}
           <Route path="venue/:id" element={<Venue />} />
+          <Route path="profile/:name" element={<Profile />} />
           <Route path="*" element={<RouteNotFound />} />
         </Route>
       </Routes>

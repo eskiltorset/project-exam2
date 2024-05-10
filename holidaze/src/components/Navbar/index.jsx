@@ -14,6 +14,8 @@ function NavBar() {
 
   // const [loginNav, setLoginNav] = useState();
   // const [registerNav, setRegisterNav] = useState(); 
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  const name = loggedInUser;
 
     return (
       
@@ -32,6 +34,7 @@ function NavBar() {
               >
                     <Nav.Link as={NavLink} to="/create-venue">Create a venue</Nav.Link>
                     <Nav.Link as={NavLink} to="/venues">Venues</Nav.Link>
+                    <Nav.Link as={NavLink} to={`/profile/${name}`}>Profile</Nav.Link>
                   <MaybeShowNavbar>
                     <Nav.Link as={NavLink} to="/register" id="nav_register">Register</Nav.Link>
                     <Nav.Link as={NavLink} to="/login" id="nav_login">Login</Nav.Link>              
