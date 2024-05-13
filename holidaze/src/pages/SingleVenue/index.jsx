@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 // import { Cartcontext } from '../../context/context';
 // import "./singleProduct.css";
 import "./singleVenue.css";
-import { DateRangePicker } from 'react-date-range';
+import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import Remove from '../../components/Delete';
@@ -19,17 +19,24 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-import { Booking } from '../../components/CreateBooking'
+import Booking from '../../components/CreateBooking';
+// import { CreateBooking } from '../../components/CreateBooking';
 // import { OnSubmit } from '../../components/CreateBooking'
 
 
 // export const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
+const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
+const token = localStorage.getItem("accessToken");
 
 function Venue() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   let { id } = useParams();
+
+  const [dateFrom, setDateFrom] = useState('');
+  const [dateTo, setDateTo] = useState('');
+  const [guests, setGuests] = useState('');
 
   const schema = yup
   .object({
@@ -56,28 +63,72 @@ function Venue() {
     });
 
 
-  // VARIABLES FOR MODAL
+//   // VARIABLES FOR MODAL
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // VARIABLES FOR CALENDAR
-  const [openDate, setOpenDate] = useState(false);
-  const [date, setDate] = useState({
-    startDate: new Date(),
-    endDate: new Date(),
-    key: 'selection',
-  });
+//   // VARIABLES FOR CALENDAR
+//   const [openDate, setOpenDate] = useState(false);
+//   const [date, setDate] = useState({
+//     startDate: new Date(),
+//     endDate: new Date(),
+//     key: 'selection',
+//   });
 
-  // CONSTANT FOR CALENDAR BOOKING
-  const handleChange = (ranges) => {
-    setDate(ranges.selection);
-  }
+//   const onChange = (props) => {
+//     const startDate = props.startDate;
+//     const endDate = props.endDate;
+// };
 
-  const handleClick = () => {
-    setOpenDate((prev) => !prev);
-  }
+//   // CONSTANT FOR CALENDAR BOOKING
+//   const handleChange = (ranges) => {
+//     setDate(ranges.selection);
+//   }
+
+//   const handleClick = () => {
+//     setOpenDate((prev) => !prev);
+//   }
+
+  // const handleSubmitBooking = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await fetch('https://v2.api.noroff.dev/holidaze/bookings', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${token}`,
+  //         "X-Noroff-API-Key": apiKey
+  //       },
+  //       body: JSON.stringify({ 
+  //         dateFrom, 
+  //         dateTo, 
+  //         venueId: id,
+  //         guests 
+  //       })
+  //     });
+
+  //     console.log(response);
+  //     const json = await response.json();
+  //     console.log(json);
+  //     console.log(json.guests);
+
+  //     if (response.ok) {
+  //       console.log('Booking successful!');
+  //       // Reset form after successful booking
+  //       setDateFrom('');
+  //       setDateTo('');
+  //       setGuests('');
+  //     } else {
+  //       console.log('Booking failed!');
+  //       // Handle error
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     // Handle error
+  //   }
+  // };
 
   useEffect(() => {
     async function getData(url) {
@@ -107,7 +158,7 @@ function Venue() {
     return <div>Error</div>;
   }
 
-  console.log(data);
+  // console.log(data);
 
   const item = data.data;
 
@@ -167,7 +218,6 @@ if (item.owner.name == localStorage.getItem("loggedInUser")){
 }
 
 else {
-   
   return (
     <div className='vh-100 container row justify-content-center mt-3 col-lg-12 w-100'>
       <div className='left-content d-flex item-div col-lg-7'>
@@ -194,42 +244,52 @@ else {
         <div className='w-100 h-auto border p-3'>
           <h5>{item.price}kr pr night</h5>
           <hr class="hr" />
-          <Form onSubmit={handleSubmit(Booking)}>
-          {/* <div className='button-container justify-content-around text-center'> */}
-          <span className='calendar w-100 text-center'>
-          <FloatingLabel
+          <Booking onSubmit={handleSubmit}></Booking>
+
+          {/* <Form onSubmit={handleSubmitBooking}>
+          <span className='calendar w-100 text-center'> */}
+          {/* <FloatingLabel
             controlId="floatingInput"
             label="Start date"
             className="mb-3 w-100"
           >
-            <Form.Control type="date" {...register('dateFrom')}/>
+            <Form.Control type="date" value={dateFrom} 
+            onChange={(e) => setDateFrom(e.target.value)}{...register('dateFrom')}/>
           </FloatingLabel>
           <FloatingLabel
             controlId="floatingInput"
             label="End date"
             className="mb-3 w-100"
           >
-            <Form.Control type="date" {...register('dateTo')}/>
-          </FloatingLabel>
-            {/* <input value={`Start date: ${format(date.startDate, 'MMM dd yyyy' )}`} className='w-50'/>
-            <input value={`End date: ${format(date.endDate, 'MMM dd yyyy' )}`} className='w-50'/> */}
+            <Form.Control type="date" value={dateFrom} 
+            onChange={(e) => setDateFrom(e.target.value)} {...register('dateTo')}/>
+          </FloatingLabel> */}
+          {/* <span className='calendar' onClick={handleClick}>
+            <input value={`Start date: ${format(date.startDate, 'MMM dd yyyy' )}`} className='w-50'/>
+            <input value={`End date: ${format(date.endDate, 'MMM dd yyyy' )}`} className='w-50'/>
+          </span>
             
           </span>
-          { openDate && <DateRangePicker  
+          { openDate && <DateRange
             ranges={[date]}
             onChange={handleChange}
             minDate={new Date()}
+            direction="horizontal"
+            className='w-100'
+            change={onChange}
             /> }
+
             <FloatingLabel
               controlId="floatingInput"
               label="Guests"
               className="mb-3 w-100"
             >
-              <Form.Control {...register('guests')} type="number" min="1" max={`${item.maxGuests}`}/>
+              <Form.Control type="number" min="1" max={`${item.maxGuests}`}  value={guests} 
+              onChange={(e) => setGuests(e.target.value)} placeholder={`${item.maxGuests}`}/>
             </FloatingLabel>
 
             <Button className='w-100 mt-3' type="submit">Reserve</Button>
-          </Form>
+          </Form> */}
           </div>
         </div>
 

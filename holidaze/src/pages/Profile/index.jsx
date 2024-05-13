@@ -33,6 +33,9 @@ function Profile() {
             // console.log(json);  
 
             setData(json);
+
+            console.log(data)
+
           }
 
         catch (error) {
@@ -43,25 +46,23 @@ function Profile() {
       getData(profile_url);
       }, []);
 
-      // useEffect(() => getData(profile_url),[]);
-      // getData(profile_url);
 
-      console.log(data)
-
-      return (
-        <div>
-          <h1>{data.data.name}</h1>
-          <p>{data.data.email}</p>
-          {data.data.venueManager === false &&
-              <p>Customer</p>
-          }
-          {data.data.venueManager === true &&
-              <p>Venue Manager</p>
-          }
-  
-        </div>
-      );
-
+      if (data != null) {
+        return (
+          <div>
+            <h1>{data.data.name}</h1>
+            <p>{data.data.email}</p>
+            {data.data.venueManager === false &&
+                <p>Customer</p>
+            }
+            {data.data.venueManager === true &&
+                <p>Venue Manager</p>
+            }
+    
+          </div>
+        );
+      }
+     
     }
 
 
