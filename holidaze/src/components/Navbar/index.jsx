@@ -7,7 +7,8 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import HolidazeLogo from "../../images/logo2.png";
 import "./navbar.css";
-import MaybeShowNavbar from '../MaybeShowNavbar'
+import MaybeShowNavbar from '../MaybeShowNavbar';
+import SignOut from '../SignOut';
 
 
 function NavBar() {
@@ -35,6 +36,7 @@ function NavBar() {
                     <Nav.Link as={NavLink} to="/create-venue">Create a venue</Nav.Link>
                     <Nav.Link as={NavLink} to="/venues">Venues</Nav.Link>
                     <Nav.Link as={NavLink} to={`/profile/${name}`}>Profile</Nav.Link>
+                    <Button variant="outline-none" onClick={SignOut}>Sign out</Button>
                   <MaybeShowNavbar>
                     <Nav.Link as={NavLink} to="/register" id="nav_register">Register</Nav.Link>
                     <Nav.Link as={NavLink} to="/login" id="nav_login">Login</Nav.Link>              
@@ -55,19 +57,5 @@ function NavBar() {
      
     );
   }
-
-  // const navLogin = document.getElementById("nav_login");
-  // const navRegister = document.getElementById("nav_register");
-
-
-  // if (localStorage.getItem("loggedInUser") != null){
-  //   navLogin.style.display = "hidden";
-  //   navRegister.style.display = "hidden";
-  // }
-
-  // else {
-  //   navLogin.style.display = "block";
-  //   navRegister.style.display = "block";
-  // }
 
   export default NavBar;

@@ -16,13 +16,11 @@ function Booking() {
     const token = localStorage.getItem("accessToken");
 
     // const [data, setData] = useState(null);
-    // const [isLoading, setIsLoading] = useState(false);
-    // const [isError, setIsError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [data, setData] = useState(null);
     let { id } = useParams();
-    const price = 300;
 
-    // const [dateFrom, setDateFrom] = useState('');
-    // const [dateTo, setDateTo] = useState('');
     const [guests, setGuests] = useState(0);
 
     const [dateRange, setDateRange] = useState([
@@ -41,19 +39,9 @@ function Booking() {
         key: 'selection',
     });
 
-    // const onChange = (props) => {
-    //     const startDate = props.startDate;
-    //     const endDate = props.endDate;
-    // };
-
     // CONSTANT FOR CALENDAR BOOKING
     const handleChange = (ranges) => {
         setDate(ranges.selection);
-        // setDate({
-        //     startDate: date.startDate,
-        //     endDate: date.endDate
-        // })
-        console.log(date);
     }
 
     const handleClick = () => {
@@ -68,6 +56,31 @@ function Booking() {
     const total_minutes = parseInt(Math.floor(total_seconds / 60));
     const total_hours = parseInt(Math.floor(total_minutes / 60));
     const daysDiff = parseInt(Math.floor(total_hours / 24));
+
+    useEffect(() => {
+        async function getData(url) {
+          try {
+            const response = await fetch(url);
+            const json = await response.json();
+    
+            setData(json);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+    
+        getData(`https://v2.api.noroff.dev/holidaze/venues/${id}?_owner=true`);
+    }, [id]);
+
+    if (isLoading || !data) {
+        return <div>Loading</div>;
+      }
+    
+      if (isError) {
+        return <div>Error</div>;
+      }
+
+    const item = data;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -144,7 +157,7 @@ function Booking() {
                     label="Start date"
                     className="mb-3"
                 >
-                    <Form.Control value={`${format(date.startDate, 'MMM dd yyyy' )}`} className='w-100'/>
+                    <Form.Control value={`${format(date.startDate, 'MMM dd yyyy' )}`} className='w-100' onChange={handleChange}/>
                 </FloatingLabel>
                 </Col>
                 <Col>
@@ -153,7 +166,7 @@ function Booking() {
                     label="End date"
                     className="mb-3"
                 >
-                    <Form.Control value={`${format(date.endDate, 'MMM dd yyyy' )}`} className='w-100'/>
+                    <Form.Control value={`${format(date.endDate, 'MMM dd yyyy' )}`} className='w-100' onChange={handleChange}/>
                 </FloatingLabel>
                 </Col>
               </Row>
@@ -181,10 +194,10 @@ function Booking() {
     
                 <Button className='w-100 mt-3' type="submit">Reserve</Button>
               </Form>
-              <p className='float-end mt-3'>{price * daysDiff} kr</p>
-              <p className='mt-3'>{price}kr x {daysDiff} nights</p>
-              <hr class="hr" />
-              <h6 className='float-end'>{price * daysDiff} kr</h6>
+              <p className='float-end mt-3'>{item.data.price * daysDiff} kr</p>
+              <p className='mt-3'>{item.data.price}kr x {daysDiff} nights</p>
+              <hr className="hr" />
+              <h6 className='float-end'>{item.data.price * daysDiff} kr</h6>
               <h6>Total: </h6>
             </div>
     );      

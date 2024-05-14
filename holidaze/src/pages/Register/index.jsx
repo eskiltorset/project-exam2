@@ -10,8 +10,6 @@ import React, { useEffect, useState } from 'react';
 const register_url = 'https://v2.api.noroff.dev/auth/register';
 const error_message = document.getElementsByClassName("error-message");
 const success_message = document.getElementsByClassName("register-success");
-console.log(error_message);
-console.log(success_message);
 
 
 // ^[\w\-.]+@(stud\.)?noroff\.no$

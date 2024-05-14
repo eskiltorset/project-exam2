@@ -19,7 +19,10 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
+
+// IMPORT COMPONENTS
 import Booking from '../../components/CreateBooking';
+import VenueInfo from '../../components/VenueInfo';
 // import { CreateBooking } from '../../components/CreateBooking';
 // import { OnSubmit } from '../../components/CreateBooking'
 
@@ -33,10 +36,6 @@ function Venue() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   let { id } = useParams();
-
-  const [dateFrom, setDateFrom] = useState('');
-  const [dateTo, setDateTo] = useState('');
-  const [guests, setGuests] = useState('');
 
   const schema = yup
   .object({
@@ -158,37 +157,18 @@ function Venue() {
     return <div>Error</div>;
   }
 
-  // console.log(data);
+  console.log(data);
 
   const item = data.data;
 
 if (item.owner.name == localStorage.getItem("loggedInUser")){
   return (
     <div className='vh-100 container row justify-content-center mt-3 col-lg-12 w-100'>
-      <div className='left-content d-flex item-div col-lg-7'>
-          <div className='m-2 w-100'>
-          <div key={item.id}>
-          <h5 className='mt-2'>{item.name}</h5>
-            <img src={item.media[0].url} alt={item.name}className='w-100'></img>
-            <div className='card-body p-3'>
-              <p className='float-end'>{item.rating}/5&#9733; </p>
-              <h6>{item.location.city}, {item.location.country}</h6>
-              <p>{item.maxGuests} guests</p>
-              <p>{item.description}</p>
-              <div className='avatar-container'>
-                <small>published by<br/></small>
-                <img src={item.owner.avatar.url} alt={item.owner.name}className='rounded-circle'></img>
-                <small><b>{item.owner.name}</b></small>
-              </div>
-              {/* <button onClick={() => dispatch({type: 'ADD', payload: item })} className='btn btn-outline-secondary mb-3 float-end'>Add to cart</button> */}
-            </div>
-          </div>
-          </div>
-      </div>
+      <VenueInfo></VenueInfo>
       <div className='right-content col-lg-5 mt-5'>
         <div className='w-100 h-auto border p-3'>
           <h5>{item.price}kr pr night</h5>
-          <hr class="hr" />
+          <hr className="hr" />
           <div className='button-container justify-content-around'>
             <Button className='col-sm-5'><Link className='text-decoration-none text-reset' to={`/edit/${item.id}`}>Edit Venue</Link></Button>
             <Button className='col-sm-5 float-end' onClick={() => Remove(item.id)}>Delete Venue</Button>
@@ -220,7 +200,8 @@ if (item.owner.name == localStorage.getItem("loggedInUser")){
 else {
   return (
     <div className='vh-100 container row justify-content-center mt-3 col-lg-12 w-100'>
-      <div className='left-content d-flex item-div col-lg-7'>
+      <VenueInfo></VenueInfo>
+      {/* <div className='left-content d-flex item-div col-lg-7'>
           <div className='m-2 w-100'>
           <div key={item.id}>
           <h5 className='mt-2'>{item.name}</h5>
@@ -235,22 +216,18 @@ else {
                 <img src={item.owner.avatar.url} alt={item.owner.name}className='rounded-circle'></img>
                 <small><b>{item.owner.name}</b></small>
               </div>
-              {/* <button onClick={() => dispatch({type: 'ADD', payload: item })} className='btn btn-outline-secondary mb-3 float-end'>Add to cart</button> */}
             </div>
           </div>
           </div>
-      </div>
+      </div> */}
       <div className='right-content col-lg-5 mt-5'>
         <div className='w-100 h-auto border p-3'>
           <h5>{item.price}kr pr night</h5>
-          <hr class="hr" />
+          <hr className="hr" />
           <Booking onSubmit={handleSubmit}></Booking>
-
           </div>
         </div>
-
       </div>
-    // </div>
   );
 }
 

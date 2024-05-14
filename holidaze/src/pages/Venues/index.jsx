@@ -53,20 +53,6 @@ function Venues() {
         <div className='venues-div d-flex flex-row flex-wrap justify-content-evenly'>
          {Array.from(venues).map((venue) => {
           if(venue.media[0] != null) {
-          
-          // const price = document.getElementsByClassName('venuePrice');
-          // console.log(price)
-          // const discount = venue.price - venue.discountedPrice;
-          // const discountPercentage = (discount / venue.price) * 100; 
-          
-          // if(venue.price != venue.discountedPrice){
-    
-          //   price.innerText = `${venue.discountedPrice},-`;
-          // }
-    
-          // else{
-          //   price.innerText = `${venue.price},-`;
-          // }
             return (
              
                 <div key={venue.id} className='venue-card mt-4 mx-2 w-25'>
