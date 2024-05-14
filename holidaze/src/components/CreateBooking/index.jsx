@@ -7,10 +7,7 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from 'date-fns';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { Row, Col } from 'react-bootstrap'
 
 
 function Booking() {
@@ -18,10 +15,11 @@ function Booking() {
     const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
     const token = localStorage.getItem("accessToken");
 
-    const [data, setData] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isError, setIsError] = useState(false);
+    // const [data, setData] = useState(null);
+    // const [isLoading, setIsLoading] = useState(false);
+    // const [isError, setIsError] = useState(false);
     let { id } = useParams();
+    const price = 300;
 
     // const [dateFrom, setDateFrom] = useState('');
     // const [dateTo, setDateTo] = useState('');
@@ -34,9 +32,6 @@ function Booking() {
           key: 'selection',
         },
       ]);
-
-    // VARIABLES FOR MODAL
-    const [show, setShow] = useState(false);
 
     // VARIABLES FOR CALENDAR
     const [openDate, setOpenDate] = useState(false);
@@ -54,6 +49,10 @@ function Booking() {
     // CONSTANT FOR CALENDAR BOOKING
     const handleChange = (ranges) => {
         setDate(ranges.selection);
+        // setDate({
+        //     startDate: date.startDate,
+        //     endDate: date.endDate
+        // })
         console.log(date);
     }
 
@@ -63,6 +62,12 @@ function Booking() {
 
     const startDate = dateRange[0].startDate.toISOString().split('T')[0];
     const endDate = dateRange[0].endDate.toISOString().split('T')[0];
+
+    const millisecondsDiff = new Date(date.endDate).getTime() - new Date(date.startDate).getTime();
+    const total_seconds = parseInt(Math.floor(millisecondsDiff / 1000));
+    const total_minutes = parseInt(Math.floor(total_seconds / 60));
+    const total_hours = parseInt(Math.floor(total_minutes / 60));
+    const daysDiff = parseInt(Math.floor(total_hours / 24));
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -87,10 +92,10 @@ function Booking() {
         console.log(response);
         const json = await response.json();
         console.log(json);
-        console.log(guests);
-        console.log(typeof(guests));
-        console.log(date.startDate);
-        console.log(date.endDate);
+        // console.log(guests);
+        // console.log(typeof(guests));
+        // console.log(date.startDate);
+        // console.log(date.endDate);
 
         if (response.ok) {
             console.log('Booking successful!');
@@ -109,6 +114,7 @@ function Booking() {
     };
 
     return (
+        <div>
             <Form onSubmit={handleSubmit}>
               {/* <div className='button-container justify-content-around text-center'> */}
               <span className='calendar w-100 text-center'>
@@ -128,10 +134,32 @@ function Booking() {
                 <Form.Control type="date" value={dateFrom} 
                 onChange={(e) => setDateFrom(e.target.value)} {...register('dateTo')}/>
               </FloatingLabel> */}
+                
+              
               <span className='calendar' onClick={handleClick}>
-                <input value={`Start date: ${format(date.startDate, 'MMM dd yyyy' )}`} className='w-50'/>
-                <input value={`End date: ${format(date.endDate, 'MMM dd yyyy' )}`} className='w-50'/>
+              <Row>
+                <Col>
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label="Start date"
+                    className="mb-3"
+                >
+                    <Form.Control value={`${format(date.startDate, 'MMM dd yyyy' )}`} className='w-100'/>
+                </FloatingLabel>
+                </Col>
+                <Col>
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label="End date"
+                    className="mb-3"
+                >
+                    <Form.Control value={`${format(date.endDate, 'MMM dd yyyy' )}`} className='w-100'/>
+                </FloatingLabel>
+                </Col>
+              </Row>
               </span>
+              
+              
                 
               </span>
               { openDate && <DateRange
@@ -139,7 +167,7 @@ function Booking() {
                 onChange={handleChange}
                 minDate={new Date()}
                 direction="horizontal"
-                // change={onChange}
+                className='w-100'
                 /> }
     
                 <FloatingLabel
@@ -153,6 +181,12 @@ function Booking() {
     
                 <Button className='w-100 mt-3' type="submit">Reserve</Button>
               </Form>
+              <p className='float-end mt-3'>{price * daysDiff} kr</p>
+              <p className='mt-3'>{price}kr x {daysDiff} nights</p>
+              <hr class="hr" />
+              <h6 className='float-end'>{price * daysDiff} kr</h6>
+              <h6>Total: </h6>
+            </div>
     );      
 }
 

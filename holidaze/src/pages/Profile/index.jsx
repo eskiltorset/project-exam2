@@ -12,7 +12,9 @@ function Profile() {
       const name = localStorage.getItem("loggedInUser");
       const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
 
-      const profile_url = `https://v2.api.noroff.dev/holidaze/profiles/${name}`
+      const profile_url = `https://v2.api.noroff.dev/holidaze/profiles/${name}`;
+      const profileBookings_url = `https://v2.api.noroff.dev/holidaze/profiles/${name}/bookings`;
+
     
       useEffect(() => {
         async function getData(url) {
@@ -34,7 +36,7 @@ function Profile() {
 
             setData(json);
 
-            console.log(data)
+            console.log(json)
 
           }
 
@@ -44,6 +46,13 @@ function Profile() {
       }
 
       getData(profile_url);
+
+      const profileData = data;
+      console.log(profileData)
+
+      // getData(profileBookings_url);
+      // const bookingData = data.data;
+      // console.log(bookingData)
       }, []);
 
 
@@ -58,6 +67,7 @@ function Profile() {
             {data.data.venueManager === true &&
                 <p>Venue Manager</p>
             }
+            <p>Bookings: {data.data._count.bookings}</p>
     
           </div>
         );

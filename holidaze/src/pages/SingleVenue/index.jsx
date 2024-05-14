@@ -246,50 +246,6 @@ else {
           <hr class="hr" />
           <Booking onSubmit={handleSubmit}></Booking>
 
-          {/* <Form onSubmit={handleSubmitBooking}>
-          <span className='calendar w-100 text-center'> */}
-          {/* <FloatingLabel
-            controlId="floatingInput"
-            label="Start date"
-            className="mb-3 w-100"
-          >
-            <Form.Control type="date" value={dateFrom} 
-            onChange={(e) => setDateFrom(e.target.value)}{...register('dateFrom')}/>
-          </FloatingLabel>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="End date"
-            className="mb-3 w-100"
-          >
-            <Form.Control type="date" value={dateFrom} 
-            onChange={(e) => setDateFrom(e.target.value)} {...register('dateTo')}/>
-          </FloatingLabel> */}
-          {/* <span className='calendar' onClick={handleClick}>
-            <input value={`Start date: ${format(date.startDate, 'MMM dd yyyy' )}`} className='w-50'/>
-            <input value={`End date: ${format(date.endDate, 'MMM dd yyyy' )}`} className='w-50'/>
-          </span>
-            
-          </span>
-          { openDate && <DateRange
-            ranges={[date]}
-            onChange={handleChange}
-            minDate={new Date()}
-            direction="horizontal"
-            className='w-100'
-            change={onChange}
-            /> }
-
-            <FloatingLabel
-              controlId="floatingInput"
-              label="Guests"
-              className="mb-3 w-100"
-            >
-              <Form.Control type="number" min="1" max={`${item.maxGuests}`}  value={guests} 
-              onChange={(e) => setGuests(e.target.value)} placeholder={`${item.maxGuests}`}/>
-            </FloatingLabel>
-
-            <Button className='w-100 mt-3' type="submit">Reserve</Button>
-          </Form> */}
           </div>
         </div>
 
