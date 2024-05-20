@@ -1,0 +1,10 @@
+.primary-button {
+    background-color: #D33753 !important;
+    color: white !important;
+    width: 100%;
+    border: none !important;
+}
+
+.primary-button:hover {
+    background-color: #da556d !important;
+}

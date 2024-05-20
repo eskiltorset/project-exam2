@@ -5,20 +5,26 @@ const MaybeShowNavbar = ({ children }) => {
     const location = useLocation();
 
     const [showNavbar, setShowNavbar] = useState(false)
+    const [showSearch, setShowSearch] = useState(false)
+
 
     useEffect(() => {
         // console.log(location)
         if ((location.pathname != '/login' || location.pathname != '/register') && (localStorage.getItem("loggedInUser") != null)){
             setShowNavbar(false);
         }
+
         else {
             setShowNavbar(true);
         }
+        
+       
     }, [location])
     
     return (
         <div>
             {showNavbar && children}  
+            {showSearch && children}  
         </div>
     )
 }

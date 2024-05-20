@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import React from 'react';
+import "../../styles/global.css";
+
 
 const login_url = 'https://v2.api.noroff.dev/auth/login';
 
@@ -94,7 +96,7 @@ function Login() {
       
         return (
           <div className='d-flex justify-content-center'>
-            <Form onSubmit={handleSubmit(loginUser)} className='vh-100 w-50 mt-3'>
+            <Form onSubmit={handleSubmit(loginUser)} className='vh-100 col-sm-8 col-md-6 col-xl-4 mt-3'>
               <h1 className='text-center mt-3 mb-5'>Login</h1>
   
               <Form.Group className="mb-3">
@@ -105,13 +107,13 @@ function Login() {
   
               <Form.Group className="mb-3">
                 <Form.Label htmlFor="password">Password</Form.Label>
-                <Form.Control {...register('password')} id="pwd" placeholder='Your password ...' />
+                <Form.Control {...register('password')} id="pwd" type="password" placeholder='Your password ...' />
                 <Form.Text className='text-danger'>{errors.password?.message}</Form.Text>
               </Form.Group>
 
               <p className='errorMessage text-danger'></p>
   
-              <Button variant="secondary" type="submit">
+              <Button className='primary-button mt-3' type="submit">
                 Submit
               </Button>
               

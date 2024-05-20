@@ -1,6 +1,8 @@
 import Button from 'react-bootstrap/Button';
 // import Dropdown from 'react-bootstrap/Dropdown';
 // import DropdownButton from 'react-bootstrap/DropdownButton';
+import "../../styles/global.css";
+
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -119,7 +121,7 @@ function Register() {
       
         return (
           <div className='d-flex justify-content-center'>
-            <Form onSubmit={handleSubmit(onSubmit)} className='vh-100 w-50 mt-3' id="registerForm">
+            <Form onSubmit={handleSubmit(onSubmit)} className='vh-100 col-sm-8 col-md-6 col-xl-4 mt-3' id="registerForm">
               <h1 className='text-center mt-3 mb-5'>Register</h1>
 
               <Form.Group className="mb-3">
@@ -166,7 +168,7 @@ function Register() {
 
               <Form.Text className='register-success text-success'></Form.Text>
   
-              <Button variant="secondary" className='w-100 mt-2' type="submit">
+              <Button className='primary-button' type="submit">
                 Register
               </Button>
               

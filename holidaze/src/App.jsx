@@ -10,12 +10,6 @@ import Update from "./components/Update";
 import Venue from "./pages/SingleVenue";
 import Profile from "./pages/Profile";
 import SignOut from "./components/SignOut";
-// import Cart from "./pages/Cart";
-// import Checkout from "./pages/Checkout";
-
-// function Home() {
-//   return <div className='vh-100'>Home</div>
-// }
 
 function RouteNotFound() {
   return <div>Page not found</div>
@@ -42,11 +36,6 @@ function App() {
           <Route path="venues" element={<Venues />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
-          {/* <Route path="login" element={<SignOut />} /> */}
-
-          {/* <Route path="contact" element={<Contact />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="checkout" element={<Checkout />} /> */}
           <Route path="venue/:id" element={<Venue />} />
           <Route path="profile/:name" element={<Profile />} />
           <Route path="*" element={<RouteNotFound />} />

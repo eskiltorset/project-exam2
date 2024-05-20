@@ -19,15 +19,13 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
+import "../../styles/global.css";
+
 
 // IMPORT COMPONENTS
 import Booking from '../../components/CreateBooking';
 import VenueInfo from '../../components/VenueInfo';
-// import { CreateBooking } from '../../components/CreateBooking';
-// import { OnSubmit } from '../../components/CreateBooking'
 
-
-// export const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
 const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
 const token = localStorage.getItem("accessToken");
 
@@ -68,66 +66,6 @@ function Venue() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-//   // VARIABLES FOR CALENDAR
-//   const [openDate, setOpenDate] = useState(false);
-//   const [date, setDate] = useState({
-//     startDate: new Date(),
-//     endDate: new Date(),
-//     key: 'selection',
-//   });
-
-//   const onChange = (props) => {
-//     const startDate = props.startDate;
-//     const endDate = props.endDate;
-// };
-
-//   // CONSTANT FOR CALENDAR BOOKING
-//   const handleChange = (ranges) => {
-//     setDate(ranges.selection);
-//   }
-
-//   const handleClick = () => {
-//     setOpenDate((prev) => !prev);
-//   }
-
-  // const handleSubmitBooking = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await fetch('https://v2.api.noroff.dev/holidaze/bookings', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: `Bearer ${token}`,
-  //         "X-Noroff-API-Key": apiKey
-  //       },
-  //       body: JSON.stringify({ 
-  //         dateFrom, 
-  //         dateTo, 
-  //         venueId: id,
-  //         guests 
-  //       })
-  //     });
-
-  //     console.log(response);
-  //     const json = await response.json();
-  //     console.log(json);
-  //     console.log(json.guests);
-
-  //     if (response.ok) {
-  //       console.log('Booking successful!');
-  //       // Reset form after successful booking
-  //       setDateFrom('');
-  //       setDateTo('');
-  //       setGuests('');
-  //     } else {
-  //       console.log('Booking failed!');
-  //       // Handle error
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //     // Handle error
-  //   }
-  // };
 
   useEffect(() => {
     async function getData(url) {
@@ -139,6 +77,7 @@ function Venue() {
         const json = await response.json();
 
         setData(json);
+        console.log(json)
       } catch (error) {
         console.log(error);
       } finally {
@@ -146,7 +85,7 @@ function Venue() {
       }
     }
 
-    getData(`https://v2.api.noroff.dev/holidaze/venues/${id}?_owner=true`);
+    getData(`https://v2.api.noroff.dev/holidaze/venues/${id}?_owner=true&_bookings=true`);
   }, [id]);
 
   if (isLoading || !data) {
@@ -163,16 +102,16 @@ function Venue() {
 
 if (item.owner.name == localStorage.getItem("loggedInUser")){
   return (
-    <div className='vh-100 container row justify-content-center mt-3 col-lg-12 w-100'>
+    <div className='vh-100 container row justify-content-center mt-3 col-lg-12 w-100 mx-auto'>
       <VenueInfo></VenueInfo>
       <div className='right-content col-lg-5 mt-5'>
-        <div className='w-100 h-auto border p-3'>
+        <div className='w-100 h-auto border rounded p-3'>
           <h5>{item.price}kr pr night</h5>
           <hr className="hr" />
           <div className='button-container justify-content-around'>
-            <Button className='col-sm-5'><Link className='text-decoration-none text-reset' to={`/edit/${item.id}`}>Edit Venue</Link></Button>
-            <Button className='col-sm-5 float-end' onClick={() => Remove(item.id)}>Delete Venue</Button>
-            <Button className='w-100 mt-3' onClick={handleShow}>View Bookings</Button>
+            <Button className='col-sm-5 outline-primary'><Link className='text-decoration-none text-reset' to={`/edit/${item.id}`}>Edit Venue</Link></Button>
+            <Button className='col-sm-5 float-end outline-danger' onClick={() => Remove(item.id)}>Delete Venue</Button>
+            <Button className='w-100 mt-3 primary-button' onClick={handleShow}>View Bookings</Button>
           </div>
         </div>
       </div>
@@ -184,6 +123,8 @@ if (item.owner.name == localStorage.getItem("loggedInUser")){
           <Modal.Title>Your Bookings</Modal.Title>
         </Modal.Header>
         <Modal.Body>You got {item._count.bookings} bookings:</Modal.Body>
+        <Modal.Body>{item.bookings[0]}</Modal.Body>
+
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -199,29 +140,10 @@ if (item.owner.name == localStorage.getItem("loggedInUser")){
 
 else {
   return (
-    <div className='vh-100 container row justify-content-center mt-3 col-lg-12 w-100'>
+    <div className='vh-100 container row justify-content-center mt-3 col-lg-12 w-100 mx-auto'>
       <VenueInfo></VenueInfo>
-      {/* <div className='left-content d-flex item-div col-lg-7'>
-          <div className='m-2 w-100'>
-          <div key={item.id}>
-          <h5 className='mt-2'>{item.name}</h5>
-            <img src={item.media[0].url} alt={item.name}className='w-100'></img>
-            <div className='card-body p-3'>
-              <p className='float-end'>{item.rating}/5&#9733; </p>
-              <h6>{item.location.city}, {item.location.country}</h6>
-              <p>{item.maxGuests} guests</p>
-              <p>{item.description}</p>
-              <div className='avatar-container'>
-                <small>published by<br/></small>
-                <img src={item.owner.avatar.url} alt={item.owner.name}className='rounded-circle'></img>
-                <small><b>{item.owner.name}</b></small>
-              </div>
-            </div>
-          </div>
-          </div>
-      </div> */}
       <div className='right-content col-lg-5 mt-5'>
-        <div className='w-100 h-auto border p-3'>
+        <div className='w-100 h-auto border rounded p-3'>
           <h5>{item.price}kr pr night</h5>
           <hr className="hr" />
           <Booking onSubmit={handleSubmit}></Booking>

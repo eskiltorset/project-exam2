@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
+import { format } from 'date-fns';
 import Remove from '../../components/Delete';
 // import Update from '../../components/Update';
 import Button from 'react-bootstrap/Button';
@@ -16,16 +17,23 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Link } from 'react-router-dom';
-import { format } from 'date-fns';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Booking from '../../components/CreateBooking';
+import { Row, Col } from 'react-bootstrap'
+
 
 function VenueInfo() {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     let { id } = useParams();
+
+    const [date, setDate] = useState({
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection',
+    });
 
     useEffect(() => {
         async function getData(url) {
@@ -76,6 +84,14 @@ function VenueInfo() {
                 </div>
                 </div>
             </div>
+            <Row>
+            {/* { <DateRange
+                ranges={[date]}
+                minDate={new Date()}
+                direction="horizontal"
+                className='w-100'
+                /> } */}
+            </Row>
         </div>
     )
 }

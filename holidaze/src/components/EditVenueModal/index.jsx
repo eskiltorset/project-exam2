@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import "../../styles/global.css";
 
 function UpdateVenueModal() {
   const [show, setShow] = useState(false);
@@ -23,7 +24,7 @@ function UpdateVenueModal() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button className='primary-button' onClick={handleClose}>
             Save Changes
           </Button>
         </Modal.Footer>
