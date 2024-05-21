@@ -9,6 +9,9 @@ const SearchBar = ({ onSearch }) => {
   
     const handleChange = (event) => {
       setSearchTerm(event.target.value);
+      if(event.target.value === ''){
+        return(<div>empty.</div>)
+      }
     };
   
     const handleSubmit = (event) => {

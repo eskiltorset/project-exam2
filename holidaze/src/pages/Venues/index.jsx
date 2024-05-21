@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import "./venues.css";
 import SearchBar from '../../components/Search';
+import { handleChange } from '../../components/Search';
 
 // Fetching all venues
 function Venues() {
@@ -14,7 +15,7 @@ function Venues() {
       // State for holding our error state
       const [isError, setIsError] = useState(false);
 
-      const [searchResults, setSearchResults] = useState([]);
+      const [searchResults, setSearchResults] = useState('');
 
   const handleSearch = async (searchTerm) => {
     try {
@@ -71,7 +72,7 @@ function Venues() {
         return <div>Error loading data</div>;
       }
 
-      
+
     
       return (
         <div> 
@@ -80,9 +81,10 @@ function Venues() {
           <SearchBar onSearch={handleSearch}/>
         </div>
 
-        <div className='venues-div d-flex flex-row flex-wrap justify-content-evenly'>
+        <div className='venues-div d-flex flex-row flex-wrap justify-content-evenly vh-100'>
          {Array.from(venues).map((venue) => {
-          if(venue.media[0] != null) {
+          if(venue.media[0] != null  && (searchResults === '' || searchResults.length === 100)) {
+
             return (
              
                 <div key={venue.id} className='venue-card mt-4 mx-2 w-25'>
@@ -95,20 +97,78 @@ function Venues() {
                     <h6>{venue.location.city}, {venue.location.country}</h6>
                     <p>{venue.maxGuests} guests</p>
                     <p className='venuePrice'><b>kr {venue.price}</b> pr night</p>
-                    {/* <Link to={`/venue/${venue.id}`} className='btn btn-outline-secondary'>View Venue</Link> */}
                   </div>
 
                 </div>
                 </Link>
                 </div>
-                
             );
           }
-          else{
-            {searchResults.map((result, index) => (
-              <li key={index}>{result}</li>
-            ))}
+
+          else {
+
+            if ( venue.media[0] != null && searchResults.includes(venue.name)) {
+              console.log(searchResults);
+
+            return (
+              <div key={venue.id} className='venue-card mt-4 mx-2 w-25'>
+                 <Link to={`/venue/${venue.id}`} className='text-decoration-none text-reset'>
+              <div>
+                <img src={venue.media[0].url} alt={venue.name} className='rounded'></img>
+                <div className='card-body-left mt-2 col-md-12'>
+                <p className='float-end'>{venue.rating}/5&#9733; </p>
+                  <h5 className=''>{venue.name}</h5>
+                  <h6>{venue.location.city}, {venue.location.country}</h6>
+                  <p>{venue.maxGuests} guests</p>
+                  <p className='venuePrice'><b>kr {venue.price}</b> pr night</p>
+                </div>
+
+              </div>
+              </Link>
+              </div>
+              
+          );
           }
+
+        //   else if(!searchResults.includes((!venue.name))){
+
+        //   return (
+        //     <div key={venue.id} className='venue-card mt-4 mx-2 w-25'>
+        //     No venues found.
+        //     </div>
+            
+        // );
+        // }
+
+          // if (venue.name.includes(!searchResults)){
+          //   return(
+          //     <div>No venues found.
+          //     <handleChange/>
+          //     </div>
+
+          //   )
+          // }
+        }
+          
+
+          // console.log(venueCard);
+
+          // if (venue.name.includes(searchResults)) {
+          //   venueCard.classList.add = "d-block";
+          // } 
+          // else {
+          //   venueCard.classList.add = "d-none";
+          // }
+          // if(searchResults != ''){
+          //   return (
+          //     <ul>
+          //       {searchResults.map((result, index) => (
+          //         <li key={index}>{result}</li>
+          //       ))}
+          //     </ul>
+          //   );
+          // }
+         
           })}
 
         </div>
