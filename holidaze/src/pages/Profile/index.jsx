@@ -2,9 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Link } from "react-router-dom";
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
+import "../../styles/global.css";
 
 import ProfileBookings from '../../components/ProfileBookings';
+import UpdateAvatar from '../../components/AvatarForm';
 // import "./venues.css";
 
 // Fetching all venues
@@ -17,6 +22,12 @@ function Profile() {
       const [isLoading, setIsLoading] = useState(false);
       // State for holding our error state
       const [isError, setIsError] = useState(false);
+
+      // Modal variables
+      const [show, setShow] = useState(false);
+
+      const handleClose = () => setShow(false);
+      const handleShow = () => setShow(true);
       
       const name = localStorage.getItem("loggedInUser");
       const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
@@ -77,19 +88,22 @@ function Profile() {
         return (
           <div>
               <div className='top text-center'>
-                <div className='bg-light p-3'>
+                <div className='bg-profile p-3'>
+                <Button variant="outline-light" size="sm" className='float-end' onClick={handleShow}>Change Avatar</Button>
+
                     <div className='avatar-container mt-3 mb-1'>
-                      <img src={data.data.avatar.url} alt={data.data.name} className='rounded-circle'></img>
-                      <b>{data.data.name}</b>
+                      <br></br><img src={data.data.avatar.url} alt={data.data.name} className='rounded-circle'></img>
+                      <br></br><h5>@{data.data.name}</h5>
                     </div>
-              
-                
+
                     {data.data.venueManager === false &&
                       <p>Customer</p>
                     }
                     {data.data.venueManager === true &&
                       <p>Venue Manager</p>
                     }
+
+
                 </div>
                 <Row className='pt-3 shadow-sm mb-4'>
                   <Col>
@@ -137,6 +151,18 @@ function Profile() {
             <div className='bookings'>
               <ProfileBookings />
             </div>
+
+              {/* Modal for bookings */}
+              <>
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Change Avatar URL</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <UpdateAvatar />
+                </Modal.Body>
+              </Modal>
+            </>
           </div>
         );
       }

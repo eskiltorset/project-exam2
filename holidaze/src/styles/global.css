@@ -8,3 +8,12 @@
 .primary-button:hover {
     background-color: #da556d !important;
 }
+
+.bg-profile {
+    background-color: #da556d !important;
+    color: white;
+}
+
+.bg-footer {
+    background-color: #dadada !important;
+}

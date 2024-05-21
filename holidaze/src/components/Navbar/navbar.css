@@ -20,7 +20,11 @@
     color: red;
 } */
 
-.navbar .nav-link { 
-    flex-direction: row;
-    float: left;
+.navUl li a {
+    color: red !important;
+}
+
+
+#basic-nav-dropdown { 
+    width: max-content;
 }
