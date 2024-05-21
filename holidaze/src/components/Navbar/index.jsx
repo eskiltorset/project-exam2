@@ -13,6 +13,8 @@ import MaybeShowNavbarLoggedIn from '../MaybeShowNavbarLoggedIn';
 import SignOut from '../SignOut';
 import SearchBar from '../Search';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import "../../styles/global.css";
+
 
 
 function NavBar() {
@@ -27,7 +29,7 @@ function NavBar() {
       
         <Navbar expand="md" className="bg-body-white shadow-sm p-4">
           <Container fluid>
-            <Navbar.Brand as={NavLink} to="/venues">      
+            <Navbar.Brand as={NavLink} to="/venues" className='primary-color'>      
               {/* <img src={HolidazeLogo} alt="Holidaze Logo" height='30' width="30"/> */}
               Holidaze
             </Navbar.Brand>

@@ -5,6 +5,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import { Row, Col } from 'react-bootstrap'
+import "../../styles/global.css";
+
 const updateVenue_URL = 'https://v2.api.noroff.dev/holidaze/venues';
 export const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
 const success_message = document.getElementsByClassName("register-success");
@@ -29,9 +32,9 @@ function Update(){
         // .required('Please enter your city'),
       zip: yup
         .string()
-        .min(4, 'Your city should be at least 4 characters.')
-        .max(4, 'Your city cannot be longer than 4 characters.'),
-        // .required('Your description must be @stud.noroff.no'),
+        .matches(/^[0-9]+$/, "Must be only digits")
+        .min(4, 'Must be exactly 4 digits')
+        .max(4, 'Must be exactly 4 digits'),
       city: yup
         .string()
         .min(2, 'Your city should be at least 2 characters.')
@@ -125,7 +128,7 @@ function Update(){
 
         return (
             <div className='d-flex justify-content-center'>
-              <Form onSubmit={handleSubmit(onSubmit)} className='vh-100 w-50 mt-3' id="registerForm">
+              <Form onSubmit={handleSubmit(onSubmit)} className='vh-100 col-sm-8 col-md-6 col-xl-5 mt-3' id="registerForm">
                 <h1 className='text-center mt-3 mb-5'>Update a Venue</h1>
   
                 <Form.Group className="mb-3">
@@ -136,22 +139,22 @@ function Update(){
     
                 <Form.Group className="mb-3">
                   <Form.Label htmlFor="description">Description</Form.Label>
-                  <Form.Control {...register('description')} placeholder='Your description address ...'/>
+                  <Form.Control {...register('description')} as="textarea" placeholder='Your description address ...'/>
                   <Form.Text className='text-danger'>{errors.description?.message}</Form.Text>
                 </Form.Group>
-    
-                <Form.Group className="mb-3 w-50 display-inline-block">
-                  <Form.Label htmlFor="city">City</Form.Label>
-                  <Form.Control {...register('city')} placeholder='Your city ...'/>
-                  <Form.Text className='text-danger'>{errors.city?.message}</Form.Text>
-                </Form.Group>
-    
-                <Form.Group className="mb-3 w-50 display-inline-block">
-                  <Form.Label htmlFor="zip">Zip</Form.Label>
-                  <Form.Control {...register('zip')} placeholder='Fill in valid image URL ...'/>
-                  <Form.Text className='text-danger'>{errors.zip?.message}</Form.Text>
-                </Form.Group>
-  
+                <Row>
+                  <Form.Group className="mb-3 w-50 display-inline-block">
+                    <Form.Label htmlFor="city">City</Form.Label>
+                    <Form.Control {...register('city')} placeholder='Your city ...'/>
+                    <Form.Text className='text-danger'>{errors.city?.message}</Form.Text>
+                  </Form.Group>
+      
+                  <Form.Group className="mb-3 w-50 display-inline-block">
+                    <Form.Label htmlFor="zip">Zip</Form.Label>
+                    <Form.Control {...register('zip')} placeholder='Ex. 1234'/>
+                    <Form.Text className='text-danger'>{errors.zip?.message}</Form.Text>
+                  </Form.Group>
+                </Row>
                 <Form.Group className="mb-3">
                   <Form.Label htmlFor="country">Country</Form.Label>
                   <Form.Control {...register('country')} placeholder='Your country ...'/>
@@ -160,25 +163,26 @@ function Update(){
     
                 <Form.Group className="mb-3">
                   <Form.Label htmlFor="media">Media</Form.Label>
-                  <Form.Control {...register('media')} placeholder='Your media address ...'/>
+                  <Form.Control {...register('media')} placeholder='Your media URL address ...'/>
                   <Form.Text className='text-danger'>{errors.media?.message}</Form.Text>
                 </Form.Group>
     
-                <Form.Group className="mb-3 w-50 display-inline-block">
-                  <Form.Label htmlFor="maxGuests">Max Guests</Form.Label>
-                  <Form.Control {...register('maxGuests')} placeholder='Your maxGuests ...'/>
-                  <Form.Text className='text-danger'>{errors.maxGuests?.message}</Form.Text>
-                </Form.Group>
-    
-                <Form.Group className="mb-3 w-50 display-inline-block">
-                  <Form.Label htmlFor="price">price</Form.Label>
-                  <Form.Control {...register('price')} placeholder='Fill in price ...'/>
-                  <Form.Text className='text-danger'>{errors.price?.message}</Form.Text>
-                </Form.Group>
-  
+                <Row>
+                  <Form.Group className="mb-3 w-50 display-inline-block">
+                    <Form.Label htmlFor="maxGuests">Max Guests</Form.Label>
+                    <Form.Control {...register('maxGuests')} placeholder='Your max guests ...'/>
+                    <Form.Text className='text-danger'>{errors.maxGuests?.message}</Form.Text>
+                  </Form.Group>
+      
+                  <Form.Group className="mb-3 w-50 display-inline-block">
+                    <Form.Label htmlFor="price">Price</Form.Label>
+                    <Form.Control {...register('price')} placeholder='Fill in price ...'/>
+                    <Form.Text className='text-danger'>{errors.price?.message}</Form.Text>
+                  </Form.Group>
+                </Row>
                 <Form.Text className='register-success text-success'></Form.Text>
     
-                <Button variant="secondary" className='w-100 mt-2' type="submit">
+                <Button className='primary-button mt-3' type="submit">
                   Update venue
                 </Button>
                 

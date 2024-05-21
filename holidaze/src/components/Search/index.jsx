@@ -21,14 +21,14 @@ const SearchBar = ({ onSearch }) => {
     return (
         <Form className="d-flex justify-content-center mb-3" onSubmit={handleSubmit}>
             <Form.Control
-            type="search"
-            placeholder="Search"
-            className="w-50"
-            aria-label="Search"
-            value={searchTerm}
-            onChange={handleChange}
+              type="search"
+              placeholder="Search"
+              className="w-50 mb-3"
+              aria-label="Search"
+              value={searchTerm}
+              onChange={handleChange}
             />
-            <Button variant="outline-dark" type="submit">Search</Button>
+            <Button className='primary-button-outline mb-3' type="submit">Search</Button>
         </Form>
     );
   };

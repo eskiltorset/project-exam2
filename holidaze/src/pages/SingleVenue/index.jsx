@@ -89,7 +89,7 @@ function Venue() {
   }, [id]);
 
   if (isLoading || !data) {
-    return <div>Loading</div>;
+    return <div className='vh-100 text-center mt-5'>Loading venues ...</div>;
   }
 
   if (isError) {
@@ -97,10 +97,14 @@ function Venue() {
   }
 
   console.log(data);
-
   const item = data.data;
 
+  const bookings = data.data.bookings;
+  console.log(bookings);
+
 if (item.owner.name == localStorage.getItem("loggedInUser")){
+  
+
   return (
     <div className='vh-100 container row justify-content-center mt-3 col-lg-12 w-100 mx-auto'>
       <VenueInfo></VenueInfo>
@@ -109,34 +113,48 @@ if (item.owner.name == localStorage.getItem("loggedInUser")){
           <h5>{item.price}kr pr night</h5>
           <hr className="hr" />
           <div className='button-container justify-content-around'>
-            <Button className='col-sm-5 outline-primary'><Link className='text-decoration-none text-reset' to={`/edit/${item.id}`}>Edit Venue</Link></Button>
-            <Button className='col-sm-5 float-end outline-danger' onClick={() => Remove(item.id)}>Delete Venue</Button>
+            <Button className='col-sm-5 outline-primary primary-button-outline'><Link className='text-decoration-none text-reset' to={`/edit/${item.id}`}>Edit Venue</Link></Button>
+            <Button className='col-sm-5 float-end outline-danger primary-button-outline' onClick={() => Remove(item.id)}>Delete Venue</Button>
             <Button className='w-100 mt-3 primary-button' onClick={handleShow}>View Bookings</Button>
           </div>
+       
         </div>
       </div>
 
       {/* Modal for bookings */}
+    
+
       <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Your Bookings</Modal.Title>
         </Modal.Header>
-        <Modal.Body>You got {item._count.bookings} bookings:</Modal.Body>
-        <Modal.Body>{item.bookings[0]}</Modal.Body>
+        <Modal.Body>You got {item._count.bookings} booking(s):</Modal.Body>
+        {Array.from(bookings).map((booking) => {
 
+          // console.log(booking.customer.name);
+
+        let fromDate = format(booking.dateFrom, 'MMM do yyyy');
+        let toDate = format(booking.dateTo, 'MMM do yyyy');
+
+        return (<Modal.Body>{booking.customer.name} | {fromDate} - {toDate}</Modal.Body>)
+      })}
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button className='primary-button' onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>
       </Modal>
     </>
+    
     </div>
 
     
   );
+  
 }
+
+
 
 else {
   return (

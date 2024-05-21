@@ -74,8 +74,11 @@ function Venues() {
       
     
       return (
-        <div className='m-3'> <h1 className="text-center p-3">Venues</h1>
-        <SearchBar onSearch={handleSearch}/>
+        <div> 
+        <div className='bg-profile mt-0'>
+          <h1 className="text-center p-3 bg-profile">Venues</h1>
+          <SearchBar onSearch={handleSearch}/>
+        </div>
 
         <div className='venues-div d-flex flex-row flex-wrap justify-content-evenly'>
          {Array.from(venues).map((venue) => {

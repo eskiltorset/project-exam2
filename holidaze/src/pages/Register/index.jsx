@@ -30,7 +30,6 @@ function Register() {
       .required('Please enter your username'),
       email: yup
         .string().email('^[\w\-.]+@(stud\.)?noroff\.no$')
-        // .validate("@stud.noroff.no")
         .required('Your email must be @stud.noroff.no'),
       password: yup
         .string()
@@ -113,11 +112,6 @@ function Register() {
                   console.log(error);
               }
         }
-
-        // let emailInput = document.getElementById("email_input").value;
-        // let pwdInput = document.getElementById("password_input").value;
-        // let avatarInput = document.getElementById("avatar_input").value;
-        // console.log(emailInput, pwdInput, avatarInput);
       
         return (
           <div className='d-flex justify-content-center'>

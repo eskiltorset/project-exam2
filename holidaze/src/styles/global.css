@@ -9,6 +9,17 @@
     background-color: #da556d !important;
 }
 
+.primary-button-outline {
+    background-color: #ffffff !important;
+    outline: 2px solid #D33753 !important;
+    color: #D33753  !important;
+    border: none !important;
+}
+
+.primary-color {
+    color: #D33753 !important;
+}
+
 .bg-profile {
     background-color: #da556d !important;
     color: white;

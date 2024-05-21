@@ -39,9 +39,10 @@ function CreateVenue() {
         .min(2, 'Your city should be at least 8 characters.')
         .max(25, 'Your city cannot be longer than 50 characters.'),
       zip: yup
-        .number()
-        .min(4, 'Your zip should be at least 4 characters.')
-        .max(4, 'Your zip cannot be longer than 4 characters.'),
+        .string()
+        .matches(/^[0-9]+$/, "Must be only digits")
+        .min(4, 'Must be exactly 4 digits')
+        .max(4, 'Must be exactly 4 digits'),
       city: yup
         .string()
         .min(2, 'Your city should be at least 2 characters.')
@@ -175,7 +176,7 @@ function CreateVenue() {
               <Row>
                 <Form.Group className="mb-3 w-50 display-inline-block">
                   <Form.Label htmlFor="maxGuests">Max Guests</Form.Label>
-                  <Form.Control {...register('maxGuests')} placeholder='Your maxGuests ...'/>
+                  <Form.Control {...register('maxGuests')} placeholder='Your max guests ...'/>
                   <Form.Text className='text-danger'>{errors.maxGuests?.message}</Form.Text>
                 </Form.Group>
     

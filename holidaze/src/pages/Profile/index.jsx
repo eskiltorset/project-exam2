@@ -75,7 +75,7 @@ function Profile() {
       }, []);
 
       if (isLoading) {
-        return <div>Loading venues</div>;
+        return <div className='vh-100 text-center mt-5'>Loading venues ...</div>;
       }
     
       if (isError) {
