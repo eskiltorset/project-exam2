@@ -28,3 +28,36 @@
 .bg-footer {
     background-color: #dadada !important;
 }
+
+.venue-card {
+    width: 20%;
+}
+
+
+@media screen and (max-width: 1300px) {
+    .venue-card {
+        max-width: 30%;
+        min-width: 30%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .venue-card {
+        max-width: 42%;
+        min-width: 42%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .venue-card {
+        max-width: 100%;
+        min-width: 100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .venue-card {
+        max-width: 100%;
+        min-width: 100%;
+    }
+}

@@ -99,6 +99,8 @@ function Venue() {
   console.log(data);
   const item = data.data;
 
+  console.log(item);
+
   const bookings = data.data.bookings;
   console.log(bookings);
 
@@ -106,7 +108,7 @@ if (item.owner.name == localStorage.getItem("loggedInUser")){
   
 
   return (
-    <div className='vh-100 container row justify-content-center mt-3 col-lg-12 w-100 mx-auto'>
+    <div className='min-vh-100 h-auto container row justify-content-center mt-3 col-lg-12 w-100 mx-auto'>
       <VenueInfo></VenueInfo>
       <div className='right-content col-lg-5 mt-5'>
         <div className='w-100 h-auto border rounded p-3'>
@@ -122,8 +124,6 @@ if (item.owner.name == localStorage.getItem("loggedInUser")){
       </div>
 
       {/* Modal for bookings */}
-    
-
       <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -158,9 +158,9 @@ if (item.owner.name == localStorage.getItem("loggedInUser")){
 
 else {
   return (
-    <div className='vh-100 container row justify-content-center mt-3 col-lg-12 w-100 mx-auto'>
+    <div className='min-vh-100 container row justify-content-center mt-3 col-lg-12 w-100 mx-auto'>
       <VenueInfo></VenueInfo>
-      <div className='right-content col-lg-5 mt-5'>
+      <div className='right-content col-lg-5 mt-5 h-auto'>
         <div className='w-100 h-auto border rounded p-3'>
           <h5>{item.price}kr pr night</h5>
           <hr className="hr" />

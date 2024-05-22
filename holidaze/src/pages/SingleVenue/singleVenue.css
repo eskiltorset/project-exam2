@@ -10,3 +10,11 @@
     margin-right: 5px;
     object-fit: cover;
 }
+
+.profile-avatar img {
+    min-height: 75px;
+    max-height: 75px;
+    width: 75px;
+    margin-right: 5px;
+    object-fit: cover;
+}

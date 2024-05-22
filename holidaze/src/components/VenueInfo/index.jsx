@@ -66,8 +66,8 @@ function VenueInfo() {
     const item = data.data;
 
     return (
-        <div className='left-content d-flex item-div col-lg-7'>
-            <div className='m-2 w-100'>
+        <div className='left-content d-flex item-div col-lg-7 h-auto'>
+            <div className='m-2 w-100 h-auto'>
                 <div key={item.id}>
                 <h5 className='mt-2'>{item.name}</h5>
                 <img src={item.media[0].url} alt={item.name}className='w-100'></img>
@@ -84,14 +84,6 @@ function VenueInfo() {
                 </div>
                 </div>
             </div>
-            <Row>
-            {/* { <DateRange
-                ranges={[date]}
-                minDate={new Date()}
-                direction="horizontal"
-                className='w-100'
-                /> } */}
-            </Row>
         </div>
     )
 }

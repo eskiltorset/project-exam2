@@ -5,27 +5,9 @@ img {
     object-fit: cover;
 }
 
-.venue-card:hover {
+/* .venue-card:hover {
     cursor: pointer;
-}
+} */
 
-@media screen and (max-width: 1000px) {
-    .venue-card {
-        max-width: 42%;
-        min-width: 42%;
-    }
-}
 
-@media screen and (max-width: 700px) {
-    .venue-card {
-        max-width: 80%;
-        min-width: 80%;
-    }
-}
 
-@media screen and (max-width: 500px) {
-    .venue-card {
-        max-width: 100%;
-        min-width: 100%;
-    }
-}

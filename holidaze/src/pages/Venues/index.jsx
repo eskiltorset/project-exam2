@@ -72,7 +72,6 @@ function Venues() {
         return <div>Error loading data</div>;
       }
 
-
     
       return (
         <div> 
@@ -81,13 +80,13 @@ function Venues() {
           <SearchBar onSearch={handleSearch}/>
         </div>
 
-        <div className='venues-div d-flex flex-row flex-wrap justify-content-evenly vh-100'>
+        <div className='venues-div d-flex flex-row flex-wrap justify-content-between h-auto mx-5'>
          {Array.from(venues).map((venue) => {
           if(venue.media[0] != null  && (searchResults === '' || searchResults.length === 100)) {
 
             return (
              
-                <div key={venue.id} className='venue-card mt-4 mx-2 w-25'>
+                <div key={venue.id} className='venue-card mt-4 mx-2'>
                    <Link to={`/venue/${venue.id}`} className='text-decoration-none text-reset'>
                 <div>
                   <img src={venue.media[0].url} alt={venue.name} className='rounded'></img>
@@ -105,9 +104,7 @@ function Venues() {
             );
           }
 
-          else {
-
-            if ( venue.media[0] != null && searchResults.includes(venue.name)) {
+            else if ( venue.media[0] != null && searchResults.includes(venue.name)) {
               console.log(searchResults);
 
             return (
@@ -130,15 +127,24 @@ function Venues() {
           );
           }
 
-        //   else if(!searchResults.includes((!venue.name))){
+          // else {
 
-        //   return (
-        //     <div key={venue.id} className='venue-card mt-4 mx-2 w-25'>
-        //     No venues found.
-        //     </div>
-            
-        // );
-        // }
+          //   return (
+          //     <div key={venue.id}>
+          //     No venues found.
+          //     </div>
+              
+          //   );
+          // }
+     
+
+        
+        })}
+        </div>
+      </div>
+      );
+    }   
+    
 
           // if (venue.name.includes(!searchResults)){
           //   return(
@@ -148,32 +154,6 @@ function Venues() {
 
           //   )
           // }
-        }
-          
-
-          // console.log(venueCard);
-
-          // if (venue.name.includes(searchResults)) {
-          //   venueCard.classList.add = "d-block";
-          // } 
-          // else {
-          //   venueCard.classList.add = "d-none";
-          // }
-          // if(searchResults != ''){
-          //   return (
-          //     <ul>
-          //       {searchResults.map((result, index) => (
-          //         <li key={index}>{result}</li>
-          //       ))}
-          //     </ul>
-          //   );
-          // }
          
-          })}
-
-        </div>
-        </div>
-      );
-    }
 
     export default Venues;

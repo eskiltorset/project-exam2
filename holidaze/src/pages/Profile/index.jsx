@@ -82,7 +82,7 @@ function Profile() {
         return <div>Error loading data</div>;
       }
 
-      console.log(venues);
+      console.log(venues.length);
 
       if (data != null) {
         return (
@@ -91,7 +91,7 @@ function Profile() {
                 <div className='bg-profile p-3'>
                 <Button variant="outline-light" size="sm" className='float-end' onClick={handleShow}>Change Avatar</Button>
 
-                    <div className='avatar-container mt-3 mb-1'>
+                    <div className='profile-avatar mt-3 mb-1'>
                       <br></br><img src={data.data.avatar.url} alt={data.data.name} className='rounded-circle'></img>
                       <br></br><h5>@{data.data.name}</h5>
                     </div>
@@ -118,35 +118,36 @@ function Profile() {
                 if (venues){ */}
                   <div className='venues'>
                   <Row className='px-4 shadow-sm mb-3'>
-                    <h4 className='text-center mb-4'>Your Venues</h4>
-                  {Array.from(venues).map((venue) => {
-                  if(venue.media[0] != null) {
-                    return (
-                        <Col>
-                        <div key={venue.id} className='venue-card mt-2 w-100 px-3'>
-                          <Link to={`/venue/${venue.id}`} className='text-decoration-none text-reset'>
-                            <div>
-                              <img src={venue.media[0].url} alt={venue.name} className='rounded'></img>
-                              <div className='card-body-left mt-2 col-md-12'>
-                              <p className='float-end'>{venue.rating}/5&#9733; </p>
-                                <h5 className=''>{venue.name}</h5>
-                                <h6>{venue.location.city}, {venue.location.country}</h6>
-                                <p>{venue.maxGuests} guests</p>
-                                <p className='venuePrice'><b>kr {venue.price}</b> pr night</p>
+                    <h4 className='text-center mb-2'>Your Venues</h4>
+                    <div className='venues-div d-flex flex-row flex-wrap justify-content-between'>
+                    {Array.from(venues).map((venue) => {
+                    if(venue.media[0] != null) {
+                      return (
+                          <div key={venue.id} className='venue-card mt-4 mx-2'>
+                            <Link to={`/venue/${venue.id}`} className='text-decoration-none text-reset'>
+                              <div>
+                                <img src={venue.media[0].url} alt={venue.name} className='rounded'></img>
+                                <div className='card-body-left mt-2 col-md-12'>
+                                <p className='float-end'>{venue.rating}/5&#9733; </p>
+                                  <h5 className=''>{venue.name}</h5>
+                                  <h6>{venue.location.city}, {venue.location.country}</h6>
+                                  <p>{venue.maxGuests} guests</p>
+                                  <p className='venuePrice'><b>kr {venue.price}</b> pr night</p>
+                                </div>
+    
                               </div>
-  
-                            </div>
-                          </Link>
-                        </div>
-                        </Col>                    
-                    );
-                  }
-                  })}
+                            </Link>
+                          </div>
+                                            
+                      );
+                    }
+                    })}
+                    </div>
                   </Row>
   
               </div>
-                {/* }
-              }} */}
+                 {/* }
+              }}  */}
             
             <div className='bookings'>
               <ProfileBookings />
