@@ -29,11 +29,11 @@ function VenueInfo() {
     const [isError, setIsError] = useState(false);
     let { id } = useParams();
 
-    const [date, setDate] = useState({
-        startDate: new Date(),
-        endDate: new Date(),
-        key: 'selection',
-    });
+    // const [date, setDate] = useState({
+    //     startDate: new Date(),
+    //     endDate: new Date(),
+    //     key: 'selection',
+    // });
 
     useEffect(() => {
         async function getData(url) {

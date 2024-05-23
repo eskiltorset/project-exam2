@@ -93,12 +93,14 @@ function CreateVenue() {
             if (response.status === 201) {
                 console.log("Venue creation successful!");
                 success_message[0].innerText = "Venue creation successfull!";
-                
+                error_message[0].innerText = '';
             }
             
             else {
                 console.log("Register failed!");
-                error_message[0].innerText = "Venue creation went wrong!";
+                error_message[0].innerText = json.errors[0].message;
+                success_message[0].innerText = '';
+
             }
     
         } catch (error) {

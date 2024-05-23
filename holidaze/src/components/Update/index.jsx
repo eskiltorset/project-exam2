@@ -11,9 +11,12 @@ import "../../styles/global.css";
 const updateVenue_URL = 'https://v2.api.noroff.dev/holidaze/venues';
 export const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
 const success_message = document.getElementsByClassName("register-success");
+const error_message = document.getElementsByClassName("register-error");
+
 
 function Update(){
     const { id } = useParams();
+    // const [data, setData] = useState(null);
 
     const schema = yup
     .object({
@@ -27,8 +30,8 @@ function Update(){
         .required('You need a description of your venue.'),
       city: yup
         .string()
-        .min(2, 'Your city should be at least 8 characters.')
-        .max(25, 'Your city cannot be longer than 50 characters.'),
+        .min(2, 'Your city should be at least 2 characters.')
+        .max(25, 'Your city cannot be longer than 25 characters.'),
         // .required('Please enter your city'),
       zip: yup
         .string()
@@ -85,6 +88,7 @@ function Update(){
             if (response.status === 200) {
                 console.log("Venue creation successful!");
                 success_message[0].innerText = "Venue is updated!";
+                error_message[0].innerText = '';
 
                 setTimeout(() => {
                     window.location.href = `/venue/${id}`;
@@ -93,7 +97,9 @@ function Update(){
             }
             
             else {
-                console.log("Update failed!");
+                console.log("failed");
+                error_message[0].innerText = json.errors[0].message;
+                success_message[0].innerText = '';
             }
     
         } catch (error) {
@@ -133,19 +139,19 @@ function Update(){
   
                 <Form.Group className="mb-3">
                   <Form.Label htmlFor="name">Title</Form.Label>
-                  <Form.Control {...register('name')} placeholder='Your name ...'/>
+                  <Form.Control {...register('name')} placeholder='Your title ...'/>
                   <Form.Text className='text-danger error-message'>{errors.name?.message}</Form.Text>
                 </Form.Group>
     
                 <Form.Group className="mb-3">
                   <Form.Label htmlFor="description">Description</Form.Label>
-                  <Form.Control {...register('description')} as="textarea" placeholder='Your description address ...'/>
+                  <Form.Control {...register('description')} as="textarea" placeholder='Your description ...'/>
                   <Form.Text className='text-danger'>{errors.description?.message}</Form.Text>
                 </Form.Group>
                 <Row>
                   <Form.Group className="mb-3 w-50 display-inline-block">
                     <Form.Label htmlFor="city">City</Form.Label>
-                    <Form.Control {...register('city')} placeholder='Your city ...'/>
+                    <Form.Control {...register('city')} placeholder='Ex. Oslo'/>
                     <Form.Text className='text-danger'>{errors.city?.message}</Form.Text>
                   </Form.Group>
       
@@ -157,7 +163,7 @@ function Update(){
                 </Row>
                 <Form.Group className="mb-3">
                   <Form.Label htmlFor="country">Country</Form.Label>
-                  <Form.Control {...register('country')} placeholder='Your country ...'/>
+                  <Form.Control {...register('country')} placeholder='Ex. Norway'/>
                   <Form.Text className='text-danger error-message'>{errors.country?.message}</Form.Text>
                 </Form.Group>
     
@@ -180,7 +186,9 @@ function Update(){
                     <Form.Text className='text-danger'>{errors.price?.message}</Form.Text>
                   </Form.Group>
                 </Row>
+                
                 <Form.Text className='register-success text-success'></Form.Text>
+                <Form.Text className='register-error text-danger'></Form.Text>
     
                 <Button className='primary-button mt-3' type="submit">
                   Update venue
