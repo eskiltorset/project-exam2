@@ -16,6 +16,7 @@ const createVenue_url = 'https://v2.api.noroff.dev/holidaze/venues';
 export const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
 // const error_message = document.getElementsByClassName("error-message");
 const success_message = document.getElementsByClassName("register-success");
+const error_message = document.getElementsByClassName("register-error");
 // console.log(error_message);
 // console.log(success_message);
 
@@ -91,17 +92,20 @@ function CreateVenue() {
     
             if (response.status === 201) {
                 console.log("Venue creation successful!");
-                success_message[0].innerText = "Register successfull!";
+                success_message[0].innerText = "Venue creation successfull!";
                 
             }
             
             else {
                 console.log("Register failed!");
+                error_message[0].innerText = "Venue creation went wrong!";
             }
     
         } catch (error) {
             console.log(error);
             // console.log(error_message);
+            error_message[0].innerText = error;
+
         }
         }
     
@@ -188,6 +192,7 @@ function CreateVenue() {
               </Row>
 
               <Form.Text className='register-success text-success'></Form.Text>
+              <Form.Text className='register-error text-danger'></Form.Text>
   
               <Button className='primary-button mt-3' type="submit">
                 Create venue

@@ -96,7 +96,7 @@ function Login() {
       
         return (
           <div className='d-flex justify-content-center'>
-            <Form onSubmit={handleSubmit(loginUser)} className='vh-100 col-sm-8 col-md-6 col-xl-4 mt-3'>
+            <Form onSubmit={handleSubmit(loginUser)} className='login-form vh-100 col-sm-8 col-md-6 col-xl-4 mt-3'>
               <h1 className='text-center mt-3 mb-5'>Login</h1>
   
               <Form.Group className="mb-3">

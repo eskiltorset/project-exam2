@@ -10,7 +10,8 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Row, Col } from 'react-bootstrap'
 import "../../styles/global.css";
 
-
+const error_message = document.getElementsByClassName("error-message");
+const success_message = document.getElementsByClassName("register-success");
 
 function Booking() {
 
@@ -161,12 +162,17 @@ function Booking() {
 
         if (response.ok) {
             console.log('Booking successful!');
+            success_message[0].innerText = "Booking successfull!";
+            error_message[0].innerText = '';
+            handleClick();
             // Reset form after successful booking
             // setDateFrom('');
             // setDateTo('');
             setGuests(0);
         } else {
             console.log('Booking failed!');
+            error_message[0].innerText = json.errors[0].message;
+            success_message[0].innerText = '';
             // Handle error
         }
         } catch (error) {
@@ -260,6 +266,9 @@ function Booking() {
                 </FloatingLabel>
     
                 <Button className='mt-3 primary-button' type="submit">Reserve</Button>
+
+                <Form.Text className='register-success text-success'></Form.Text>
+                <Form.Text className='error-message text-danger'></Form.Text>
               </Form>
               <p className='float-end mt-3'>{item.data.price * daysDiff} kr</p>
               <p className='mt-3'>{item.data.price}kr x {daysDiff} nights</p>

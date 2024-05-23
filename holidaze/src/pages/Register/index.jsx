@@ -70,18 +70,18 @@ function Register() {
                 console.log(json);
         
                 if (response.status === 201) {
-                    console.log("Register successful!");
                     success_message[0].innerText = "Register successfull!";
-                    
+                    error_message[0].innerText = '';
                 }
               
                 else {
                     console.log("Register failed!");
+                    error_message[0].innerText = json.errors[0].message;
+                    success_message[0].innerText = '';
                 }
         
             } catch (error) {
                 console.log(error);
-                console.log(error_message);
             }
           }
       
@@ -110,12 +110,13 @@ function Register() {
       
               catch(error) {
                   console.log(error);
+                  error_message[0].innerText = error.errors.errors;
               }
         }
       
         return (
           <div className='d-flex justify-content-center'>
-            <Form onSubmit={handleSubmit(onSubmit)} className='vh-100 col-sm-8 col-md-6 col-xl-4 mt-3' id="registerForm">
+            <Form onSubmit={handleSubmit(onSubmit)} className='vh-100 register-form col-sm-8 col-md-6 col-xl-4 mt-3' id="registerForm">
               <h1 className='text-center mt-3 mb-5'>Register</h1>
 
               <Form.Group className="mb-3">
@@ -132,7 +133,7 @@ function Register() {
   
               <Form.Group className="mb-3">
                 <Form.Label htmlFor="password">Password</Form.Label>
-                <Form.Control {...register('password')} placeholder='Your password ...'/>
+                <Form.Control {...register('password')} type="password" placeholder='Your password ...'/>
                 <Form.Text className='text-danger'>{errors.password?.message}</Form.Text>
               </Form.Group>
   
@@ -161,6 +162,7 @@ function Register() {
               </Form.Group>
 
               <Form.Text className='register-success text-success'></Form.Text>
+              <Form.Text className='error-message text-danger'></Form.Text>
   
               <Button className='primary-button' type="submit">
                 Register

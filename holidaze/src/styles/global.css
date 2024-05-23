@@ -55,6 +55,18 @@
     }
 }
 
+@media screen and (max-width: 575px) {
+    .login-form  {
+        max-width: 80%;
+        min-width: 80%;
+    }
+
+    .register-form  {
+        max-width: 80%;
+        min-width: 80%;
+    }
+}
+
 @media screen and (max-width: 500px) {
     .venue-card {
         max-width: 100%;

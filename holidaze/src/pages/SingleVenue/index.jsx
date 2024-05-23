@@ -105,7 +105,6 @@ function Venue() {
   console.log(bookings);
 
 if (item.owner.name == localStorage.getItem("loggedInUser")){
-  
 
   return (
     <div className='min-vh-100 h-auto container row justify-content-center mt-3 col-lg-12 w-100 mx-auto'>
@@ -116,7 +115,8 @@ if (item.owner.name == localStorage.getItem("loggedInUser")){
           <hr className="hr" />
           <div className='button-container justify-content-around'>
             <Button className='col-sm-5 outline-primary primary-button-outline'><Link className='text-decoration-none text-reset' to={`/edit/${item.id}`}>Edit Venue</Link></Button>
-            <Button className='col-sm-5 float-end outline-danger primary-button-outline' onClick={() => Remove(item.id)}>Delete Venue</Button>
+            <Button className='col-sm-5 float-end outline-danger primary-button-outline' type="submit" 
+              onClick={() => { if (window.confirm('Are you sure you want to delete this venue?')) Remove(item.id) } }>Delete Venue</Button>
             <Button className='w-100 mt-3 primary-button' onClick={handleShow}>View Bookings</Button>
           </div>
        

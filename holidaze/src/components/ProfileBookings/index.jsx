@@ -84,7 +84,7 @@ function ProfileBookings() {
                         let toDate = format(venue.dateTo, 'MMM do yyyy');
                         
                         return (
-                                <div key={venue.venue.id} className='venue-card mt-4 mx-2'>
+                                <div key={venue.venue.id} className='venue-card mt-4 mx-4'>
                                   <Link to={`/venue/${venue.venue.id}`} className='text-decoration-none text-reset'>
                                     <div>
                                         <img src={venue.venue.media[0].url} alt={venue.name} className='rounded'></img>

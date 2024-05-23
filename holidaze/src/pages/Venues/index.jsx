@@ -85,7 +85,6 @@ function Venues() {
           if(venue.media[0] != null  && (searchResults === '' || searchResults.length === 100)) {
 
             return (
-             
                 <div key={venue.id} className='venue-card mt-4 mx-2'>
                    <Link to={`/venue/${venue.id}`} className='text-decoration-none text-reset'>
                 <div>

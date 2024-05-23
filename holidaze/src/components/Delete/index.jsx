@@ -9,12 +9,8 @@ async function Remove(id){
     const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
     const name = localStorage.getItem("loggedInUser");
 
-
-
-
-    // console.log(id);
-
     try{
+
         const options = {
             method: "delete",
             headers: {
@@ -28,9 +24,10 @@ async function Remove(id){
 
         if (response.ok){
             console.log("Venue deleted")
+            // errorMessage.inenrText = "Venue deleted";
             setTimeout(() => {
                 window.location.href = `/profile/${name}`;
-              }, 1500);
+              }, 500);
         }
     }
     catch (error){
