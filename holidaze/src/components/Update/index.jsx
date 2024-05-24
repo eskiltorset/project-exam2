@@ -23,7 +23,7 @@ function Update(){
       name: yup
       .string()
       .min(2, 'Your name should be at least 2 characters.')
-      .max(50, 'Your name cannot be longer than 20 characters.')
+      .max(50, 'Your name cannot be longer than 50 characters.')
       .required('Please enter your name'),
       description: yup
         .string()
@@ -32,17 +32,15 @@ function Update(){
         .string()
         .min(2, 'Your city should be at least 2 characters.')
         .max(25, 'Your city cannot be longer than 25 characters.'),
-        // .required('Please enter your city'),
       zip: yup
         .string()
         .matches(/^[0-9]+$/, "Must be only digits")
         .min(4, 'Must be exactly 4 digits')
         .max(4, 'Must be exactly 4 digits'),
-      city: yup
+      country: yup
         .string()
         .min(2, 'Your city should be at least 2 characters.')
         .max(25, 'Your city cannot be longer than 25 characters.'),
-        // .required('Please enter your city'),
       media: yup
         .string().url()
         .required('Please enter valid URL'),
@@ -51,7 +49,9 @@ function Update(){
         .required('Your max guest should be between 1-20 people'),
       price: yup
         .number()
-        .required('Your venue needs a price per night'),
+        .required('Your venue needs a price per night')
+        .min(1, 'Your price should be at least 1.')
+        .max(9999, 'Your price must not exceed 9999.'),
     })
     .required();
   
@@ -64,7 +64,6 @@ function Update(){
         });
       
         function onSubmit(data) {
-        console.log(data);
         const token = localStorage.getItem("accessToken");
 
         async function UpdateVenue(url, newFormData) {
@@ -81,12 +80,9 @@ function Update(){
             };
     
             const response = await fetch(url, postData);
-            console.log(response);
             const json = await response.json();
-            console.log(json);
     
             if (response.status === 200) {
-                console.log("Venue creation successful!");
                 success_message[0].innerText = "Venue is updated!";
                 error_message[0].innerText = '';
 
@@ -97,7 +93,6 @@ function Update(){
             }
             
             else {
-                console.log("failed");
                 error_message[0].innerText = json.errors[0].message;
                 success_message[0].innerText = '';
             }
@@ -134,7 +129,7 @@ function Update(){
 
         return (
             <div className='d-flex justify-content-center'>
-              <Form onSubmit={handleSubmit(onSubmit)} className='vh-100 col-sm-8 col-md-6 col-xl-5 mt-3' id="registerForm">
+              <Form onSubmit={handleSubmit(onSubmit)} className='min-vh-100 col-sm-8 col-md-6 col-xl-5 mt-3' id="registerForm">
                 <h1 className='text-center mt-3 mb-5'>Update a Venue</h1>
   
                 <Form.Group className="mb-3">
@@ -186,7 +181,7 @@ function Update(){
                     <Form.Text className='text-danger'>{errors.price?.message}</Form.Text>
                   </Form.Group>
                 </Row>
-                
+
                 <Form.Text className='register-success text-success'></Form.Text>
                 <Form.Text className='register-error text-danger'></Form.Text>
     

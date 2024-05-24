@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
 
 const SearchBar = ({ onSearch }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -18,8 +16,6 @@ const SearchBar = ({ onSearch }) => {
       event.preventDefault();
       onSearch(searchTerm);
     };
-
-    console.log(searchTerm);
   
     return (
         <Form className="d-flex justify-content-center mb-3" onSubmit={handleSubmit}>

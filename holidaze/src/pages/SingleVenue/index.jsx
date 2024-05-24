@@ -1,30 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-// import { Cartcontext } from '../../context/context';
-// import "./singleProduct.css";
-import "./singleVenue.css";
-import { DateRange } from 'react-date-range';
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
-import Remove from '../../components/Delete';
-// import Update from '../../components/Update';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-// import UpdateVenueModal from '../../components/EditVenueModal'
-// import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
+
+import 'react-date-range/dist/styles.css'; 
+import 'react-date-range/dist/theme/default.css'; 
 import "../../styles/global.css";
+import "./singleVenue.css";
 
-
-// IMPORT COMPONENTS
 import Booking from '../../components/CreateBooking';
 import VenueInfo from '../../components/VenueInfo';
+import Remove from '../../components/Delete';
+
 
 const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
 const token = localStorage.getItem("accessToken");
@@ -52,7 +44,7 @@ function Venue() {
   .required();
 
   const {
-    register,
+    // register,
     handleSubmit,
     formState: { errors },
     } = useForm({
@@ -60,7 +52,7 @@ function Venue() {
     });
 
 
-//   // VARIABLES FOR MODAL
+  // VARIABLES FOR MODAL
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -123,7 +115,7 @@ if (item.owner.name == localStorage.getItem("loggedInUser")){
         </div>
       </div>
 
-      {/* Modal for bookings */}
+      {/* Modal */}
       <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -131,8 +123,6 @@ if (item.owner.name == localStorage.getItem("loggedInUser")){
         </Modal.Header>
         <Modal.Body>You got {item._count.bookings} booking(s):</Modal.Body>
         {Array.from(bookings).map((booking) => {
-
-          // console.log(booking.customer.name);
 
         let fromDate = format(booking.dateFrom, 'MMM do yyyy');
         let toDate = format(booking.dateTo, 'MMM do yyyy');
@@ -145,16 +135,13 @@ if (item.owner.name == localStorage.getItem("loggedInUser")){
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
-    
+      </>
     </div>
 
     
   );
   
 }
-
-
 
 else {
   return (

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 
 async function Remove(id){
 
@@ -10,7 +9,6 @@ async function Remove(id){
     const name = localStorage.getItem("loggedInUser");
 
     try{
-
         const options = {
             method: "delete",
             headers: {
@@ -23,8 +21,6 @@ async function Remove(id){
         console.log(response);  
 
         if (response.ok){
-            console.log("Venue deleted")
-            // errorMessage.inenrText = "Venue deleted";
             setTimeout(() => {
                 window.location.href = `/profile/${name}`;
               }, 500);

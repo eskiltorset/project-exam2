@@ -1,13 +1,14 @@
 import { useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import React, { useContext, useEffect, useState } from 'react'; 
+import React, { useEffect, useState } from 'react'; 
 import { DateRange } from 'react-date-range';
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from 'date-fns';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Row, Col } from 'react-bootstrap'
+
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css'; 
 import "../../styles/global.css";
 
 const error_message = document.getElementsByClassName("error-message");
@@ -23,61 +24,29 @@ function Booking() {
     const [isError, setIsError] = useState(false);
     const [data, setData] = useState(null);
     const [bookings, setBookings] = useState(null);
-    // const [startDateDisabled, setStartDateDisabled] = useState([null]);
-    // const [endDateDisabled, setEndDateDisabled] = useState([null]);
+
     const initialValues = [{
         fromDates: '',
         endDates: '',
     }]
 
-    const disabledDates = {};
-
     if (bookings){
-        
         for (let i = 0; i < bookings.length; i++) {
-
             initialValues.push({ fromDates: (bookings[i].dateFrom), endDates: (bookings[i].dateTo) });
-            // console.log(initialValues[i]);
         }
-
-        console.log(initialValues);
-
-
     }
-
-    // initialValues[0].forEach((date) => {
-    //     disabledDates[date] = true; // Disable booked dates
-    //     if (initialValues[0].fromDates && initialValues[0].endDates) {
-    //       const start = new Date(initialValues[0].fromDates);
-    //       const end = new Date(initialValues[0].endDates);
-    //       const currentDate = new Date(date);
-    //       // Disable dates within range
-    //       if (currentDate >= start && currentDate <= end) {
-    //         // Add additional dates within range to disabled dates
-    //         disabledDates[date] = true;
-    //       }
-    //     }
-    //   });
-
-    // for (let i = 0; i < bookings.length; i++) {
-    //     renderedDates.push(<li key={i}>{initialValues[i]}</li>);
-    // }
-
-    // console.log(`RenderedDates: ${renderedDates}`);
-
-
 
     let { id } = useParams();
 
     const [guests, setGuests] = useState(0);
 
-    const [dateRange, setDateRange] = useState([
-        {
-          startDate: new Date(),
-          endDate: new Date(),
-          key: 'selection',
-        },
-      ]);
+    // const [dateRange, setDateRange] = useState([
+    //     {
+    //       startDate: new Date(),
+    //       endDate: new Date(),
+    //       key: 'selection',
+    //     },
+    //   ]);
 
     // VARIABLES FOR CALENDAR
     const [openDate, setOpenDate] = useState(false);
@@ -95,9 +64,6 @@ function Booking() {
     const handleClick = () => {
         setOpenDate((prev) => !prev);
     }
-
-    // const startDate = dateRange[0].startDate.toISOString().split('T')[0];
-    // const endDate = dateRange[0].endDate.toISOString().split('T')[0];
 
     const millisecondsDiff = new Date(date.endDate).getTime() - new Date(date.startDate).getTime();
     const total_seconds = parseInt(Math.floor(millisecondsDiff / 1000));
@@ -130,7 +96,6 @@ function Booking() {
       }
 
     const item = data;
-    // console.log(bookings);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -155,55 +120,25 @@ function Booking() {
         console.log(response);
         const json = await response.json();
         console.log(json);
-        // console.log(guests);
-        // console.log(typeof(guests));
-        // console.log(date.startDate);
-        // console.log(date.endDate);
 
         if (response.ok) {
-            console.log('Booking successful!');
             success_message[0].innerText = "Booking successfull!";
             error_message[0].innerText = '';
             handleClick();
-            // Reset form after successful booking
-            // setDateFrom('');
-            // setDateTo('');
             setGuests(0);
         } else {
-            console.log('Booking failed!');
             error_message[0].innerText = json.errors[0].message;
             success_message[0].innerText = '';
-            // Handle error
         }
         } catch (error) {
-        console.log(error);
-        // Handle error
+          console.log(error);
         }
     };
 
     return (
         <div>
             <Form onSubmit={handleSubmit}>
-              {/* <div className='button-container justify-content-around text-center'> */}
-              <span className='calendar w-100 text-center'>
-              {/* <FloatingLabel
-                controlId="floatingInput"
-                label="Start date"
-                className="mb-3 w-100"
-              >
-                <Form.Control type="date" value={dateFrom} 
-                onChange={(e) => setDateFrom(e.target.value)}{...register('dateFrom')}/>
-              </FloatingLabel>
-              <FloatingLabel
-                controlId="floatingInput"
-                label="End date"
-                className="mb-3 w-100"
-              >
-                <Form.Control type="date" value={dateFrom} 
-                onChange={(e) => setDateFrom(e.target.value)} {...register('dateTo')}/>
-              </FloatingLabel> */}
-                
-              
+              <span className='calendar w-100 text-center'> 
               <span className='calendar' onClick={handleClick}>
               <Row>
                 <Col>
@@ -230,32 +165,23 @@ function Booking() {
               
                 
               </span>
-              {/* { Array.from(initialValues).map((dates) => { */}
               { openDate && <DateRange
-                    ranges={[date]}
-                    onChange={handleChange}
-                    minDate={new Date()}
-                    direction="horizontal"
-                    className='w-100'
-                    disabledDates=
-                        {Array.from(initialValues).map((date) => {
-                            console.log(`fromDates: ${date.fromDates}`);
-                            console.log(`endDate: ${date.endDates}`);
+                  ranges={[date]}
+                  onChange={handleChange}
+                  minDate={new Date()}
+                  direction="horizontal"
+                  className='w-100'
+                  rangeColors={["#D33753"]}
+                  disabledDates=
+                      {Array.from(initialValues).map((date) => {
 
-                            return (
-                                    date.fromDates,
-                                    date.endDates
-                            )
-                        })
-                    
-                        }  
-                    
-            
-                /> }
-                {/* })}; */}
+                          return (
+                                  date.fromDates,
+                                  date.endDates
+                          )
+                      })}  
+              /> }
                 
-                
-    
                 <FloatingLabel
                   controlId="floatingInput"
                   label="Guests"
@@ -280,9 +206,6 @@ function Booking() {
 }
 
 export default Booking;
-
-
-// export function Booking(data) {
 
     // const createBooking_URL = 'https://v2.api.noroff.dev/holidaze/bookings';
     // const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';

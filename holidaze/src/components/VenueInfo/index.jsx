@@ -1,26 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-// import { Cartcontext } from '../../context/context';
-// import "./singleProduct.css";
-// import "./singleVenue.css";
-import { DateRange } from 'react-date-range';
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
-import { format } from 'date-fns';
-import Remove from '../../components/Delete';
-// import Update from '../../components/Update';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-// import UpdateVenueModal from '../../components/EditVenueModal'
-// import Form from 'react-bootstrap/Form';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { Link } from 'react-router-dom';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
-import Booking from '../../components/CreateBooking';
-import { Row, Col } from 'react-bootstrap'
 
 
 function VenueInfo() {
@@ -28,12 +7,6 @@ function VenueInfo() {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     let { id } = useParams();
-
-    // const [date, setDate] = useState({
-    //     startDate: new Date(),
-    //     endDate: new Date(),
-    //     key: 'selection',
-    // });
 
     useEffect(() => {
         async function getData(url) {

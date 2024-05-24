@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import React from 'react';
+
 import "../../styles/global.css";
 
 
 const login_url = 'https://v2.api.noroff.dev/auth/login';
-
 
 function Login() {
     const schema = yup
@@ -44,12 +44,9 @@ function Login() {
               };
       
               const response = await fetch(url, postData);
-              console.log(response);
               const json = await response.json();
-              console.log(json);
       
               if (response.status === 200) {
-                  console.log("Login successful!");
                   window.location.href = "/";
 
                   const accessToken = json.data.accessToken;
@@ -58,16 +55,10 @@ function Login() {
                   let loggedInUser = json.data.name;
                   localStorage.setItem("loggedInUser", loggedInUser);
 
-                  console.log(`Name: ${localStorage.getItem("loggedInUser")}`);
-                  console.log(accessToken)
-                  // success_message[0].innerText = "Register successfull!";
-                  // window.location.reload();
               }
             
               else {
-                  console.log("Login failed!");
                   const errorMessage = document.querySelector('.errorMessage');
-
                   errorMessage.innerText = "Invalid email or password";
               }
 

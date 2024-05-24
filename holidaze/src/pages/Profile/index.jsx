@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-
 import { Link } from "react-router-dom";
 import { Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -10,17 +8,13 @@ import "../../styles/global.css";
 
 import ProfileBookings from '../../components/ProfileBookings';
 import UpdateAvatar from '../../components/AvatarForm';
-// import "./venues.css";
 
-// Fetching all venues
 function Profile() {
 
       const [data, setData] = useState(null);
       const [venues, setVenues] = useState([]);
 
-      // State for holding our loading state
       const [isLoading, setIsLoading] = useState(false);
-      // State for holding our error state
       const [isError, setIsError] = useState(false);
 
       // Modal variables
@@ -33,8 +27,6 @@ function Profile() {
       const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
 
       const profile_url = `https://v2.api.noroff.dev/holidaze/profiles/${name}?_bookings=true&_venues=true`;
-      const profileBookings_url = `https://v2.api.noroff.dev/holidaze/profiles/${name}/bookings`;
-
     
       useEffect(() => {
         async function getData(url) {
@@ -52,16 +44,13 @@ function Profile() {
         
             const response = await fetch(url, fetchOptions);
             const json = await response.json();
-            // console.log(json);  
 
             setData(json);
             setVenues(json.data.venues);
 
-            console.log(json);
           }
 
         catch (error) {
-          console.log(error);
           setIsLoading(false);
           setIsError(true);
         }
@@ -70,7 +59,6 @@ function Profile() {
       getData(profile_url);
 
       const profileData = data;
-      console.log(profileData)
 
       }, []);
 
@@ -114,40 +102,36 @@ function Profile() {
                   </Col>
                 </Row>
               </div>
-              {/* { () => {
-                if (venues){ */}
-                  <div className='venues'>
-                  <Row className='px-4 shadow-sm mb-3'>
-                    <h4 className='text-center mb-2'>Your Venues</h4>
-                    <div className='venues-div d-flex flex-row flex-wrap justify-content-between'>
-                    {Array.from(venues).map((venue) => {
-                    if(venue.media[0] != null) {
-                      return (
-                          <div key={venue.id} className='venue-card mt-4 mx-2'>
-                            <Link to={`/venue/${venue.id}`} className='text-decoration-none text-reset'>
-                              <div>
-                                <img src={venue.media[0].url} alt={venue.name} className='rounded'></img>
-                                <div className='card-body-left mt-2 col-md-12'>
-                                <p className='float-end'>{venue.rating}/5&#9733; </p>
-                                  <h5 className=''>{venue.name}</h5>
-                                  <h6>{venue.location.city}, {venue.location.country}</h6>
-                                  <p>{venue.maxGuests} guests</p>
-                                  <p className='venuePrice'><b>kr {venue.price}</b> pr night</p>
-                                </div>
-    
+
+              <div className='venues'>
+                <Row className='px-4 shadow-sm mb-3'>
+                  <h4 className='text-center mb-2'>Your Venues</h4>
+                  <div className='venues-div d-flex flex-row flex-wrap justify-content-between'>
+                  {Array.from(venues).map((venue) => {
+                  if(venue.media[0] != null) {
+                    return (
+                        <div key={venue.id} className='venue-card mt-4 mx-2'>
+                          <Link to={`/venue/${venue.id}`} className='text-decoration-none text-reset'>
+                            <div>
+                              <img src={venue.media[0].url} alt={venue.name} className='rounded'></img>
+                              <div className='card-body-left mt-2 col-md-12'>
+                              <p className='float-end'>{venue.rating}/5&#9733; </p>
+                                <h5 className=''>{venue.name}</h5>
+                                <h6>{venue.location.city}, {venue.location.country}</h6>
+                                <p>{venue.maxGuests} guests</p>
+                                <p className='venuePrice'><b>kr {venue.price}</b> pr night</p>
                               </div>
-                            </Link>
-                          </div>
-                                            
-                      );
-                    }
-                    })}
-                    </div>
-                  </Row>
-  
+
+                            </div>
+                          </Link>
+                        </div>
+                                          
+                    );
+                  }
+                  })}
+                  </div>
+                </Row>
               </div>
-                 {/* }
-              }}  */}
             
             <div className='bookings'>
               <ProfileBookings />

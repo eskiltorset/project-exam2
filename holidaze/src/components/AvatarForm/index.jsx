@@ -1,13 +1,12 @@
 import Button from 'react-bootstrap/Button';
-// import Dropdown from 'react-bootstrap/Dropdown';
-// import DropdownButton from 'react-bootstrap/DropdownButton';
-import "../../styles/global.css";
-
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+
+import "../../styles/global.css";
+
 
 const name = localStorage.getItem("loggedInUser");
 console.log(name);
@@ -16,13 +15,10 @@ const register_url = `https://v2.api.noroff.dev/holidaze/profiles/${name}`;
 const success_message = document.getElementsByClassName("register-success");
 const error_message = document.getElementsByClassName("error-message");
 
-
 const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
 const token = localStorage.getItem("accessToken");
 
-
 function UpdateAvatar() {
-
 
 const schema = yup
 .object({

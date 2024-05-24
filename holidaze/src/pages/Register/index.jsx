@@ -1,20 +1,16 @@
 import Button from 'react-bootstrap/Button';
-// import Dropdown from 'react-bootstrap/Dropdown';
-// import DropdownButton from 'react-bootstrap/DropdownButton';
-import "../../styles/global.css";
-
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+
+import "../../styles/global.css";
 
 const register_url = 'https://v2.api.noroff.dev/auth/register';
-const error_message = document.getElementsByClassName("error-message");
+// const error_message = document.getElementsByClassName("error-message");
+const error_message_submit = document.getElementsByClassName("error-message-submit");
 const success_message = document.getElementsByClassName("register-success");
-
-
-// ^[\w\-.]+@(stud\.)?noroff\.no$
 
 function Register() {
 
@@ -29,7 +25,8 @@ function Register() {
       .max(20, 'Your password cannot be longer than 20 characters.')
       .required('Please enter your username'),
       email: yup
-        .string().email('^[\w\-.]+@(stud\.)?noroff\.no$')
+        .string().email()
+        .matches(/^[\w\-.]+@(stud\.)?noroff\.no$/, "Your email must be @stud.noroff.no/@noroff.no")
         .required('Your email must be @stud.noroff.no'),
       password: yup
         .string()
@@ -38,7 +35,6 @@ function Register() {
         .required('Please enter your password'),
       avatar: yup
         .string().url()
-        // .required('Please enter valid URL'),
     })
     .required();
   
@@ -71,12 +67,12 @@ function Register() {
         
                 if (response.status === 201) {
                     success_message[0].innerText = "Register successfull!";
-                    error_message[0].innerText = '';
+                    error_message_submit[0].innerText = '';
                 }
               
                 else {
                     console.log("Register failed!");
-                    error_message[0].innerText = json.errors[0].message;
+                    error_message_submit[0].innerText = json.errors[0].message;
                     success_message[0].innerText = '';
                 }
         
@@ -110,7 +106,7 @@ function Register() {
       
               catch(error) {
                   console.log(error);
-                  error_message[0].innerText = error.errors.errors;
+                  error_message_submit[0].innerText = error.errors.errors;
               }
         }
       
@@ -150,7 +146,7 @@ function Register() {
                         label="Customer"
                         name="role"
                         value="customer"   
-                        onChange={e => setRole(e.target.value)}      
+                        onChange={e => setRole(e.target.value)} 
                     />
                     <Form.Check
                         type="radio"
@@ -162,7 +158,7 @@ function Register() {
               </Form.Group>
 
               <Form.Text className='register-success text-success'></Form.Text>
-              <Form.Text className='error-message text-danger'></Form.Text>
+              <Form.Text className='error-message-submit text-danger'></Form.Text>
   
               <Button className='primary-button' type="submit">
                 Register

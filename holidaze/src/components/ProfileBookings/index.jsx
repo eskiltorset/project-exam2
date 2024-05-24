@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-
 import { Link } from "react-router-dom";
-import { Row, Col } from 'react-bootstrap'
-
+import { Row } from 'react-bootstrap'
 import { format } from 'date-fns';
 
 import "../../styles/global.css";
@@ -11,12 +8,10 @@ import "../../styles/global.css";
 
 function ProfileBookings() {
 
-    const [data, setData] = useState(null);
+    // const [data, setData] = useState(null);
     const [venues, setVenues] = useState([]);
 
-    // State for holding our loading state
     const [isLoading, setIsLoading] = useState(false);
-    // State for holding our error state
     const [isError, setIsError] = useState(false);
     
     const name = localStorage.getItem("loggedInUser");
@@ -84,22 +79,22 @@ function ProfileBookings() {
                         let toDate = format(venue.dateTo, 'MMM do yyyy');
                         
                         return (
-                                <div key={venue.venue.id} className='venue-card mt-4 mx-4'>
-                                  <Link to={`/venue/${venue.venue.id}`} className='text-decoration-none text-reset'>
-                                    <div>
-                                        <img src={venue.venue.media[0].url} alt={venue.name} className='rounded'></img>
-                                        <div className='card-body-left mt-2 col-md-12'>
-                                        <p className='float-end'>{venue.venue.rating}/5&#9733; </p>
-                                        <h5 className=''>{venue.venue.name}</h5>
-                                        <h6>{venue.venue.location.city}, {venue.venue.location.country}</h6>
-                                        <p>{venue.venue.maxGuests} guests</p>
-                                        <h6> {fromDate} - {toDate}</h6>
-                                        <p className='venuePrice'><b>kr {venue.venue.price}</b> pr night</p>
-                                        
-                                        </div>
-                                    </div>
-                                  </Link>
-                                </div>
+                          <div key={venue.venue.id} className='venue-card mt-4 mx-4'>
+                            <Link to={`/venue/${venue.venue.id}`} className='text-decoration-none text-reset'>
+                              <div>
+                                  <img src={venue.venue.media[0].url} alt={venue.name} className='rounded'></img>
+                                  <div className='card-body-left mt-2 col-md-12'>
+                                  <p className='float-end'>{venue.venue.rating}/5&#9733; </p>
+                                  <h5 className=''>{venue.venue.name}</h5>
+                                  <h6>{venue.venue.location.city}, {venue.venue.location.country}</h6>
+                                  <p>{venue.venue.maxGuests} guests</p>
+                                  <h6> {fromDate} - {toDate}</h6>
+                                  <p className='venuePrice'><b>kr {venue.venue.price}</b> pr night</p>
+                                  
+                                  </div>
+                              </div>
+                            </Link>
+                          </div>
                         )
                     })}
                     </div>

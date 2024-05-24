@@ -2,9 +2,8 @@ import React from "react";
 
 function SignOut() {
     try{
-        console.log("logging out");
         localStorage.clear();
-        window.location.href = '/';
+        window.location.href = '/login';
     }
     catch(error){
         console.log(error);

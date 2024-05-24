@@ -9,7 +9,6 @@ const MaybeShowNavbar = ({ children }) => {
 
 
     useEffect(() => {
-        // console.log(location)
         if ((location.pathname != '/login' || location.pathname != '/register') && (localStorage.getItem("loggedInUser") != null)){
             setShowNavbar(false);
         }

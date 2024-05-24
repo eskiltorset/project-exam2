@@ -1,44 +1,41 @@
 import Button from 'react-bootstrap/Button';
-// import Dropdown from 'react-bootstrap/Dropdown';
-// import DropdownButton from 'react-bootstrap/DropdownButton';
+import { useParams } from 'react-router-dom';
+
 import Form from 'react-bootstrap/Form';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { Row } from 'react-bootstrap'
+
 import "../../styles/global.css";
-import { Row, Col } from 'react-bootstrap'
 
 
 const createVenue_url = 'https://v2.api.noroff.dev/holidaze/venues';
-// const apiKey = 'https://v2.api.noroff.dev/auth/create-api-key';
 
 export const apiKey = '795d7f87-c437-4950-bc0a-f262a0b473a9';
-// const error_message = document.getElementsByClassName("error-message");
 const success_message = document.getElementsByClassName("register-success");
 const error_message = document.getElementsByClassName("register-error");
-// console.log(error_message);
-// console.log(success_message);
 
-
-// ^[\w\-.]+@(stud\.)?noroff\.no$
 
 function CreateVenue() {
+  const { id } = useParams();
+
 
     const schema = yup
     .object({
       name: yup
       .string()
       .min(2, 'Your name should be at least 2 characters.')
-      .max(50, 'Your name cannot be longer than 20 characters.')
+      .max(20, 'Your name cannot be longer than 20 characters.')
       .required('Please enter your name'),
       description: yup
         .string()
         .required('You need a description of your venue.'),
       city: yup
         .string()
-        .min(2, 'Your city should be at least 8 characters.')
-        .max(25, 'Your city cannot be longer than 50 characters.'),
+        .min(2, 'Your city should be at least 2 characters.')
+        .max(25, 'Your city cannot be longer than 25 characters.'),
       zip: yup
         .string()
         .matches(/^[0-9]+$/, "Must be only digits")
@@ -69,7 +66,6 @@ function CreateVenue() {
         });
       
         function onSubmit(data) {
-        console.log(data);
         const token = localStorage.getItem("accessToken");
 
         async function registerVenue(url, venueData) {
@@ -86,18 +82,16 @@ function CreateVenue() {
             };
     
             const response = await fetch(url, postData);
-            console.log(response);
             const json = await response.json();
-            console.log(json);
     
             if (response.status === 201) {
-                console.log("Venue creation successful!");
                 success_message[0].innerText = "Venue creation successfull!";
                 error_message[0].innerText = '';
+                // window.location.reload();
+                window.location.href = `/`;
             }
             
             else {
-                console.log("Register failed!");
                 error_message[0].innerText = json.errors[0].message;
                 success_message[0].innerText = '';
 
@@ -105,9 +99,7 @@ function CreateVenue() {
     
         } catch (error) {
             console.log(error);
-            // console.log(error_message);
             error_message[0].innerText = error;
-
         }
         }
     
@@ -139,7 +131,7 @@ function CreateVenue() {
       
         return (
           <div className='d-flex justify-content-center'>
-            <Form onSubmit={handleSubmit(onSubmit)} className='vh-100 col-sm-8 col-md-6 col-xl-5 mt-3' id="registerForm">
+            <Form onSubmit={handleSubmit(onSubmit)} className='min-vh-100 col-sm-8 col-md-6 col-xl-5 mt-3' id="registerForm">
               <h1 className='text-center mt-3 mb-5'>Create a Venue</h1>
 
               <Form.Group className="mb-3">
