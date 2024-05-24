@@ -29,7 +29,7 @@ function NavBar() {
       
         <Navbar expand="md" className="bg-body-white shadow-sm p-4">
           <Container fluid>
-            <Navbar.Brand as={NavLink} to="/venues" className='primary-color'>      
+            <Navbar.Brand as={NavLink} to="/" className='primary-color'>      
               {/* <img src={HolidazeLogo} alt="Holidaze Logo" height='30' width="30"/> */}
               Holidaze
             </Navbar.Brand>
@@ -38,7 +38,7 @@ function NavBar() {
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
               <Nav className="toggle-navbar justify-content-end w-100" navbarScroll>
-                  <Nav.Link as={NavLink} to="/venues" className='float-start'>Venues</Nav.Link>
+                  <Nav.Link as={NavLink} to="/" className='float-start'>Venues</Nav.Link>
 
                   <MaybeShowNavbarLoggedIn>
                     <Nav.Link as={NavLink} to="/create-venue" className='float-start'>Create a venue</Nav.Link>

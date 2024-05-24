@@ -50,7 +50,7 @@ function Login() {
       
               if (response.status === 200) {
                   console.log("Login successful!");
-                  window.location.href = "/venues";
+                  window.location.href = "/";
 
                   const accessToken = json.data.accessToken;
                   localStorage.setItem("accessToken", accessToken);

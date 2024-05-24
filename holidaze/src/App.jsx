@@ -33,7 +33,7 @@ function App() {
           {/* <Route index element={<Venues />} /> */}
           <Route path="create-venue" element={<CreateVenue />} />
           <Route path="edit/:id" element={<Update />} />
-          <Route path="venues" element={<Venues />} />
+          <Route path="/" element={<Venues />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="venue/:id" element={<Venue />} />
