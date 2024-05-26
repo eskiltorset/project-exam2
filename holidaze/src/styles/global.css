@@ -1,0 +1,75 @@
+.primary-button {
+    background-color: #D33753 !important;
+    color: white !important;
+    width: 100%;
+    border: none !important;
+}
+
+.primary-button:hover {
+    background-color: #da556d !important;
+}
+
+.primary-button-outline {
+    background-color: #ffffff !important;
+    outline: 2px solid #D33753 !important;
+    color: #D33753  !important;
+    border: none !important;
+}
+
+.primary-color {
+    color: #D33753 !important;
+}
+
+.bg-profile {
+    background-color: #da556d !important;
+    color: white;
+}
+
+.bg-footer {
+    background-color: #dadada !important;
+}
+
+.venue-card {
+    width: 20%;
+}
+
+
+@media screen and (max-width: 1300px) {
+    .venue-card {
+        max-width: 30%;
+        min-width: 30%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .venue-card {
+        max-width: 42%;
+        min-width: 42%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .venue-card {
+        max-width: 100%;
+        min-width: 100%;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .login-form  {
+        max-width: 80%;
+        min-width: 80%;
+    }
+
+    .register-form  {
+        max-width: 80%;
+        min-width: 80%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .venue-card {
+        max-width: 100%;
+        min-width: 100%;
+    }
+}
